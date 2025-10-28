@@ -1,0 +1,34 @@
+/* src/components/Card/style.css */
+.custom-card {
+  background-color: var(--background-card); /* Usando variável de cor */
+  padding: 40px 30px; /* Mais padding vertical que horizontal */
+  border-radius: 10px;
+  width: 450px; /* Largura fixa como na imagem */
+  max-width: 90%; /* Evita que fique muito largo em telas pequenas */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra suave */
+  box-sizing: border-box;
+
+  /* Para organizar os itens internos (título, inputs, botão) */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza itens internos horizontalmente */
+  gap: 25px; /* Espaçamento entre os itens */
+}
+
+/* Estilo específico para o H1 dentro do Card */
+.custom-card h1 {
+  color: var(--text-light); /* Texto branco */
+  font-size: 1.5em; /* Tamanho do título */
+  font-weight: 600; /* Peso da fonte */
+  margin-bottom: 10px; /* Espaço extra abaixo do título */
+  text-align: center;
+}
+
+/* Faz o formulário (se houver) ocupar a largura interna */
+.custom-card form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Espaço entre inputs/botão dentro do form */
+}

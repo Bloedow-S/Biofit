@@ -1,0 +1,22 @@
+/* src/components/Input/style.css */
+.custom-input {
+  background-color: var(--background-input); /* Branco */
+  color: var(--text-dark); /* Texto escuro */
+  border: none;
+  border-radius: 30px; /* Bem arredondado */
+  height: 50px; /* Um pouco mais alto que antes */
+  font-size: 1rem; /* Tamanho de fonte padrão */
+  padding: 0 20px; /* Padding interno horizontal */
+  outline: none;
+  width: 100%; /* Ocupa toda a largura disponível no container pai (form/card) */
+  box-sizing: border-box;
+}
+
+.custom-input::placeholder {
+  color: var(--text-placeholder); /* Cor do placeholder */
+}
+
+.custom-input:focus {
+  /* Opcional: Efeito visual ao focar */
+  box-shadow: 0 0 0 2px rgba(99, 185, 149, 0.5); /* Sombra verde clara */
+}

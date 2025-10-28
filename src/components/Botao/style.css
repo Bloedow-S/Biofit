@@ -1,0 +1,19 @@
+/* src/components/Botao/style.css */
+.custom-button {
+  background-color: var(--background-button); /* Verde */
+  color: var(--text-light); /* Texto branco */
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 30px; /* Bem arredondado */
+  height: 50px; /* Mesma altura do input */
+  font-size: 1rem; /* Tamanho de fonte */
+  width: 100%; /* Ocupa toda a largura disponível */
+  box-sizing: border-box;
+  transition: opacity 0.2s ease-in-out;
+  margin-top: 10px; /* Espaço extra acima do botão */
+}
+
+.custom-button:hover {
+  opacity: 0.85; /* Efeito suave no hover */
+}

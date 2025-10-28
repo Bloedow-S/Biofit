@@ -1,14 +1,43 @@
-:root {   
-  font-family: "Noto Sans", sans-serif;;
-  color-scheme: light dark;
-  color: #0C0F0A;
-  background-color: #EBF4FE;
+/* src/index.css */
+:root {
+  font-family: "Noto Sans", sans-serif; /* Mantém sua fonte */
+  color: #0C0F0A; /* Cor de texto padrão (escura) */
+
+  /* Cores - úteis para referência */
+  --background-page: #EBF4FE; /* Azul claro do fundo */
+  --background-card: #5d7783; /* Cinza-azulado do card */
+  --background-input: #ffffff; /* Branco dos inputs */
+  --background-button: #63b995; /* Verde do botão */
+  --text-light: #ffffff; /* Texto branco */
+  --text-dark: #0C0F0A; /* Texto escuro */
+  --text-placeholder: #888; /* Cinza para placeholder */
 }
- 
+
 body {
-  margin: 0;
+  margin: 0; /* Remove margens padrão */
+  padding: 0; /* Remove paddings padrão */
+  background-color: var(--background-page); /* Cor de fundo da página */
+  display: flex; /* Habilita flexbox */
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  min-height: 100vh; /* Garante que o body ocupe a altura toda da tela */
+  box-sizing: border-box;
+}
+
+/* Garante que o container principal ocupe espaço para centralização funcionar */
+#root {
+  width: 100%;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Remove estilos padrão que podem atrapalhar */
+h1, p {
+  margin: 0;
+}
+
+button, input {
+  font-family: inherit; /* Garante que usem a fonte Noto Sans */
+  box-sizing: border-box; /* Inclui padding e borda no tamanho total */
 }
