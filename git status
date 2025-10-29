@@ -1,0 +1,1334 @@
+[1mdiff --git a/README.md b/README.md[m
+[1mindex 6d3c744..f768e33 100644[m
+[1m--- a/README.md[m
+[1m+++ b/README.md[m
+[36m@@ -1,63 +1,8 @@[m
+[31m-# BioFit - Programa de Acompanhamento de Saúde[m
+[32m+[m[32m# React + Vite[m
+ [m
+[31m-Este projeto é um aplicativo de acompanhamento de saúde e fitness, desenvolvido como parte da disciplina de Laboratório de Engenharia de Software. Ele permite ao usuário gerenciar seu perfil pessoal e calcular diversas métricas corporais e nutricionais.[m
+[32m+[m[32mThis template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.[m
+ [m
+[31m-O projeto foi criado com **React** e **Vite**.[m
+[32m+[m[32mCurrently, two official plugins are available:[m
+ [m
+[31m-## Autores[m
+[31m-[m
+[31m-* Arthur Zimmermann[m
+[31m-* Gabriel Molinari[m
+[31m-* Rafaella Gonçalves[m
+[31m-* Sabrina Bloedow[m
+[31m-[m
+[31m-## Funcionalidades Principais[m
+[31m-[m
+[31m-Conforme a documentação do projeto, as principais funcionalidades incluem:[m
+[31m-[m
+[31m-1.  **Gerenciamento de Perfil:**[m
+[31m-    * Cadastro de usuário com nome, email, sexo, idade, peso, altura e objetivo.[m
+[31m-    * Edição dos dados pessoais.[m
+[31m-    * Exibição de um resumo rápido na tela de perfil, incluindo IMC e peso atual.[m
+[31m-[m
+[31m-2.  **Cálculos e Métricas Corporais:**[m
+[31m-    * **IMC:** Cálculo do Índice de Massa Corporal.[m
+[31m-    * **TMB:** Cálculo da Taxa Metabólica Basal (calorias diárias).[m
+[31m-    * **Déficit Calórico:** Cálculo baseado no objetivo do usuário.[m
+[31m-    * **Creatina:** Cálculo da dose recomendada com base no peso.[m
+[31m-[m
+[31m-3.  **Cálculo de Macronutrientes:**[m
+[31m-    * Calcula a distribuição ideal de proteínas, carboidratos e gorduras com base no gasto calórico diário (TMB) e no objetivo do usuário.[m
+[31m-[m
+[31m-## Estrutura do Projeto[m
+[31m-[m
+[31m-O projeto utiliza uma estrutura padrão de aplicações React, separando componentes reutilizáveis e páginas.[m
+[31m-[m
+[31m-## Tecnologias Utilizadas[m
+[31m-[m
+[31m-* **Vite:** Build tool e servidor de desenvolvimento.[m
+[31m-* **React:** Biblioteca principal para a UI.[m
+[31m-* **React Router DOM:** Para gerenciamento de rotas (navegação entre páginas).[m
+[31m-* **ESLint:** Ferramenta para linting e padronização de código.[m
+[31m-* **Prop-types:** Para validação de tipos das props nos componentes React.[m
+[31m-[m
+[31m-## Scripts Disponíveis[m
+[31m-[m
+[31m-No diretório do projeto, você pode executar os seguintes comandos:[m
+[31m-[m
+[31m-### `npm run dev`[m
+[31m-[m
+[31m-Executa o aplicativo em modo de desenvolvimento.[m
+[31m-Abra [http://localhost:5173](http://localhost:5173) (ou a porta indicada no terminal) para visualizá-lo no navegador.[m
+[31m-[m
+[31m-### `npm run build`[m
+[31m-[m
+[31m-Compila o aplicativo para produção na pasta `dist/`.[m
+[31m-[m
+[31m-### `npm run lint`[m
+[31m-[m
+[31m-Executa o ESLint para analisar o código e encontrar problemas de formatação ou erros.[m
+[31m-[m
+[31m-### `npm run preview`[m
+[31m-[m
+[31m-Inicia um servidor local para pré-visualizar a versão de produção (após executar `npm run build`).[m
+\ No newline at end of file[m
+[32m+[m[32m- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh[m
+[32m+[m[32m- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh[m
+[1mdiff --git a/index.html b/index.html[m
+[1mindex e30514b..7bca584 100644[m
+[1m--- a/index.html[m
+[1m+++ b/index.html[m
+[36m@@ -3,7 +3,6 @@[m
+ [m
+ <head>[m
+   <meta charset="UTF-8" />[m
+[31m-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />[m
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />[m
+   <link rel="preconnect" href="https://fonts.googleapis.com">[m
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>[m
+[1mdiff --git a/package-lock.json b/package-lock.json[m
+[1mindex 301c9f7..b313a19 100644[m
+[1m--- a/package-lock.json[m
+[1m+++ b/package-lock.json[m
+[36m@@ -8,10 +8,8 @@[m
+       "name": "biofit",[m
+       "version": "0.0.0",[m
+       "dependencies": {[m
+[31m-        "prop-types": "^15.8.1",[m
+         "react": "^18.3.1",[m
+[31m-        "react-dom": "^18.3.1",[m
+[31m-        "react-router-dom": "^7.9.4"[m
+[32m+[m[32m        "react-dom": "^18.3.1"[m
+       },[m
+       "devDependencies": {[m
+         "@eslint/js": "^9.9.0",[m
+[36m@@ -1802,15 +1800,6 @@[m
+       "dev": true,[m
+       "license": "MIT"[m
+     },[m
+[31m-    "node_modules/cookie": {[m
+[31m-      "version": "1.0.2",[m
+[31m-      "resolved": "https://registry.npmjs.org/cookie/-/cookie-1.0.2.tgz",[m
+[31m-      "integrity": "sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==",[m
+[31m-      "license": "MIT",[m
+[31m-      "engines": {[m
+[31m-        "node": ">=18"[m
+[31m-      }[m
+[31m-    },[m
+     "node_modules/cross-spawn": {[m
+       "version": "7.0.6",[m
+       "resolved": "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.6.tgz",[m
+[36m@@ -3487,6 +3476,7 @@[m
+       "version": "4.1.1",[m
+       "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz",[m
+       "integrity": "sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==",[m
+[32m+[m[32m      "dev": true,[m
+       "license": "MIT",[m
+       "engines": {[m
+         "node": ">=0.10.0"[m
+[36m@@ -3758,6 +3748,7 @@[m
+       "version": "15.8.1",[m
+       "resolved": "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz",[m
+       "integrity": "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==",[m
+[32m+[m[32m      "dev": true,[m
+       "license": "MIT",[m
+       "dependencies": {[m
+         "loose-envify": "^1.4.0",[m
+[36m@@ -3804,6 +3795,7 @@[m
+       "version": "16.13.1",[m
+       "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz",[m
+       "integrity": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==",[m
+[32m+[m[32m      "dev": true,[m
+       "license": "MIT"[m
+     },[m
+     "node_modules/react-refresh": {[m
+[36m@@ -3816,44 +3808,6 @@[m
+         "node": ">=0.10.0"[m
+       }[m
+     },[m
+[31m-    "node_modules/react-router": {[m
+[31m-      "version": "7.9.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/react-router/-/react-router-7.9.4.tgz",[m
+[31m-      "integrity": "sha512-SD3G8HKviFHg9xj7dNODUKDFgpG4xqD5nhyd0mYoB5iISepuZAvzSr8ywxgxKJ52yRzf/HWtVHc9AWwoTbljvA==",[m
+[31m-      "license": "MIT",[m
+[31m-      "dependencies": {[m
+[31m-        "cookie": "^1.0.1",[m
+[31m-        "set-cookie-parser": "^2.6.0"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=20.0.0"[m
+[31m-      },[m
+[31m-      "peerDependencies": {[m
+[31m-        "react": ">=18",[m
+[31m-        "react-dom": ">=18"[m
+[31m-      },[m
+[31m-      "peerDependenciesMeta": {[m
+[31m-        "react-dom": {[m
+[31m-          "optional": true[m
+[31m-        }[m
+[31m-      }[m
+[31m-    },[m
+[31m-    "node_modules/react-router-dom": {[m
+[31m-      "version": "7.9.4",[m
+[31m-      "resolved": "https://registry.npmjs.org/react-router-dom/-/react-router-dom-7.9.4.tgz",[m
+[31m-      "integrity": "sha512-f30P6bIkmYvnHHa5Gcu65deIXoA2+r3Eb6PJIAddvsT9aGlchMatJ51GgpU470aSqRRbFX22T70yQNUGuW3DfA==",[m
+[31m-      "license": "MIT",[m
+[31m-      "dependencies": {[m
+[31m-        "react-router": "7.9.4"[m
+[31m-      },[m
+[31m-      "engines": {[m
+[31m-        "node": ">=20.0.0"[m
+[31m-      },[m
+[31m-      "peerDependencies": {[m
+[31m-        "react": ">=18",[m
+[31m-        "react-dom": ">=18"[m
+[31m-      }[m
+[31m-    },[m
+     "node_modules/reflect.getprototypeof": {[m
+       "version": "1.0.10",[m
+       "resolved": "https://registry.npmjs.org/reflect.getprototypeof/-/reflect.getprototypeof-1.0.10.tgz",[m
+[36m@@ -4042,12 +3996,6 @@[m
+         "semver": "bin/semver.js"[m
+       }[m
+     },[m
+[31m-    "node_modules/set-cookie-parser": {[m
+[31m-      "version": "2.7.2",[m
+[31m-      "resolved": "https://registry.npmjs.org/set-cookie-parser/-/set-cookie-parser-2.7.2.tgz",[m
+[31m-      "integrity": "sha512-oeM1lpU/UvhTxw+g3cIfxXHyJRc/uidd3yK1P242gzHds0udQBYzs3y8j4gCCW+ZJ7ad0yctld8RYO+bdurlvw==",[m
+[31m-      "license": "MIT"[m
+[31m-    },[m
+     "node_modules/set-function-length": {[m
+       "version": "1.2.2",[m
+       "resolved": "https://registry.npmjs.org/set-function-length/-/set-function-length-1.2.2.tgz",[m
+[1mdiff --git a/package.json b/package.json[m
+[1mindex ebd0e00..f033deb 100644[m
+[1m--- a/package.json[m
+[1m+++ b/package.json[m
+[36m@@ -10,10 +10,8 @@[m
+     "preview": "vite preview"[m
+   },[m
+   "dependencies": {[m
+[31m-    "prop-types": "^15.8.1",[m
+     "react": "^18.3.1",[m
+[31m-    "react-dom": "^18.3.1",[m
+[31m-    "react-router-dom": "^7.9.4"[m
+[32m+[m[32m    "react-dom": "^18.3.1"[m
+   },[m
+   "devDependencies": {[m
+     "@eslint/js": "^9.9.0",[m
+[1mdiff --git a/public/vite.svg b/public/vite.svg[m
+[1mdeleted file mode 100644[m
+[1mindex e7b8dfb..0000000[m
+[1m--- a/public/vite.svg[m
+[1m+++ /dev/null[m
+[36m@@ -1 +0,0 @@[m
+[31m-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--logos" width="31.88" height="32" preserveAspectRatio="xMidYMid meet" viewBox="0 0 256 257"><defs><linearGradient id="IconifyId1813088fe1fbc01fb466" x1="-.828%" x2="57.636%" y1="7.652%" y2="78.411%"><stop offset="0%" stop-color="#41D1FF"></stop><stop offset="100%" stop-color="#BD34FE"></stop></linearGradient><linearGradient id="IconifyId1813088fe1fbc01fb467" x1="43.376%" x2="50.316%" y1="2.242%" y2="89.03%"><stop offset="0%" stop-color="#FFEA83"></stop><stop offset="8.333%" stop-color="#FFDD35"></stop><stop offset="100%" stop-color="#FFA800"></stop></linearGradient></defs><path fill="url(#IconifyId1813088fe1fbc01fb466)" d="M255.153 37.938L134.897 252.976c-2.483 4.44-8.862 4.466-11.382.048L.875 37.958c-2.746-4.814 1.371-10.646 6.827-9.67l120.385 21.517a6.537 6.537 0 0 0 2.322-.004l117.867-21.483c5.438-.991 9.574 4.796 6.877 9.62Z"></path><path fill="url(#IconifyId1813088fe1fbc01fb467)" d="M185.432.063L96.44 17.501a3.268 3.268 0 0 0-2.634 3.014l-5.474 92.456a3.268 3.268 0 0 0 3.997 3.378l24.777-5.718c2.318-.535 4.413 1.507 3.936 3.838l-7.361 36.047c-.495 2.426 1.782 4.5 4.151 3.78l15.304-4.649c2.372-.72 4.652 1.36 4.15 3.788l-11.698 56.621c-.732 3.542 3.979 5.473 5.943 2.437l1.313-2.028l72.516-144.72c1.215-2.423-.88-5.186-3.54-4.672l-25.505 4.922c-2.396.462-4.435-1.77-3.759-4.114l16.646-57.705c.677-2.35-1.37-4.583-3.769-4.113Z"></path></svg>[m
+\ No newline at end of file[m
+[1mdiff --git a/src/assets/Logo.png b/src/assets/Logo.png[m
+[1mdeleted file mode 100644[m
+[1mindex 59a4458..0000000[m
+Binary files a/src/assets/Logo.png and /dev/null differ
+[1mdiff --git a/src/assets/Logo2.png b/src/assets/Logo2.png[m
+[1mdeleted file mode 100644[m
+[1mindex 55b57bb..0000000[m
+Binary files a/src/assets/Logo2.png and /dev/null differ
+[1mdiff --git a/src/assets/calculadora.png b/src/assets/calculadora.png[m
+[1mdeleted file mode 100644[m
+[1mindex a459cc2..0000000[m
+Binary files a/src/assets/calculadora.png and /dev/null differ
+[1mdiff --git a/src/assets/do-utilizador.png b/src/assets/do-utilizador.png[m
+[1mdeleted file mode 100644[m
+[1mindex ff20a20..0000000[m
+Binary files a/src/assets/do-utilizador.png and /dev/null differ
+[1mdiff --git a/src/assets/fatia-de-bolo.png b/src/assets/fatia-de-bolo.png[m
+[1mdeleted file mode 100644[m
+[1mindex 46229a4..0000000[m
+Binary files a/src/assets/fatia-de-bolo.png and /dev/null differ
+[1mdiff --git a/src/assets/fogo.png b/src/assets/fogo.png[m
+[1mdeleted file mode 100644[m
+[1mindex 9d48097..0000000[m
+Binary files a/src/assets/fogo.png and /dev/null differ
+[1mdiff --git a/src/assets/grafico-de-pizza.png b/src/assets/grafico-de-pizza.png[m
+[1mdeleted file mode 100644[m
+[1mindex f1f5fd9..0000000[m
+Binary files a/src/assets/grafico-de-pizza.png and /dev/null differ
+[1mdiff --git a/src/assets/historia.png b/src/assets/historia.png[m
+[1mdeleted file mode 100644[m
+[1mindex 6dd9160..0000000[m
+Binary files a/src/assets/historia.png and /dev/null differ
+[1mdiff --git a/src/assets/peso.png b/src/assets/peso.png[m
+[1mdeleted file mode 100644[m
+[1mindex c1b2dda..0000000[m
+Binary files a/src/assets/peso.png and /dev/null differ
+[1mdiff --git a/src/components/Botao/index.jsx b/src/components/Botao/index.jsx[m
+[1mdeleted file mode 100644[m
+[1mindex 797f81b..0000000[m
+[1m--- a/src/components/Botao/index.jsx[m
+[1m+++ /dev/null[m
+[36m@@ -1,17 +0,0 @@[m
+[31m-import './style.css'; [m
+[31m-import PropTypes from "prop-types";[m
+[31m-[m
+[31m-function Botao({ type = "button", children, ...rest }) {[m
+[31m-  return ([m
+[31m-    <button className="custom-button" type={type} {...rest}>[m
+[31m-      {children}[m
+[31m-    </button>[m
+[31m-  );[m
+[31m-}[m
+[31m-[m
+[31m-Botao.propTypes = {[m
+[31m-  type: PropTypes.string,[m
+[31m-  children: PropTypes.node,[m
+[31m-};[m
+[31m-[m
+[31m-export default Botao;[m
+\ No newline at end of file[m
+[1mdiff --git a/src/components/Botao/style.css b/src/components/Botao/style.css[m
+[1mdeleted file mode 100644[m
+[1mindex b043a9e..0000000[m
+[1m--- a/src/components/Botao/style.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,19 +0,0 @@[m
+[31m-/* src/components/Botao/style.css */[m
+[31m-.custom-button {[m
+[31m-  background-color: var(--background-button); /* Verde */[m
+[31m-  color: var(--text-light); /* Texto branco */[m
+[31m-  border: none;[m
+[31m-  font-weight: bold;[m
+[31m-  cursor: pointer;[m
+[31m-  border-radius: 30px; /* Bem arredondado */[m
+[31m-  height: 50px; /* Mesma altura do input */[m
+[31m-  font-size: 1rem; /* Tamanho de fonte */[m
+[31m-  width: 100%; /* Ocupa toda a largura disponível */[m
+[31m-  box-sizing: border-box;[m
+[31m-  transition: opacity 0.2s ease-in-out;[m
+[31m-  margin-top: 10px; /* Espaço extra acima do botão */[m
+[31m-}[m
+[31m-[m
+[31m-.custom-button:hover {[m
+[31m-  opacity: 0.85; /* Efeito suave no hover */[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/components/Button/index.jsx b/src/components/Button/index.jsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..e826b74[m
+[1m--- /dev/null[m
+[1m+++ b/src/components/Button/index.jsx[m
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32mimport './style.css'[m
+[32m+[m
+[32m+[m[32mfunction Button({text, type = 'buton'}) {    //componente React sempre função com letra M. como uma classe[m
+[32m+[m
+[32m+[m[32m  //acima de return vai o JS bruto[m
+[32m+[m[32m  return (      //vai ter um return que sempre vai ser html; p colocar js se usa {}[m[41m [m
+[32m+[m[32m    <button className='button' type={type}>{text}</button>[m
+[32m+[m[32m  )[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport default Button[m
+[1mdiff --git a/src/components/Button/style.css b/src/components/Button/style.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..b2a9b88[m
+[1m--- /dev/null[m
+[1m+++ b/src/components/Button/style.css[m
+[36m@@ -0,0 +1,15 @@[m
+[32m+[m[32m/*onde estão agrupados os inputs e botões*/[m
+[32m+[m[32m.button {[m
+[32m+[m[32m  background-color: #63b995;[m
+[32m+[m[32m  border: none;[m
+[32m+[m[32m  font-weight: bold;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m  border-radius: 30px;[m
+[32m+[m[32m  height: 40px;[m
+[32m+[m[32m  font-size: 14px;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button:hover {[m
+[32m+[m[32m  opacity: 0.8;[m
+[32m+[m[32m}[m
+[32m+[m[41m  [m
+\ No newline at end of file[m
+[1mdiff --git a/src/components/Card/index.jsx b/src/components/Card/index.jsx[m
+[1mindex f20da3f..c856b42 100644[m
+[1m--- a/src/components/Card/index.jsx[m
+[1m+++ b/src/components/Card/index.jsx[m
+[36m@@ -1,16 +1,12 @@[m
+[31m-import PropTypes from "prop-types";[m
+[31m-import "./style.css";[m
+[32m+[m[32mimport './style.css'[m
+ [m
+[31m-function Card({ children }) {[m
+[31m-  return ([m
+[31m-    <div className="custom-card">[m
+[31m-      {children} {/* */}[m
+[32m+[m[32mfunction Card({children, title}) {[m
+[32m+[m[32m  return ([m[41m      [m
+[32m+[m[32m    <div className='card'>[m
+[32m+[m[32m      {title && <h1>{title}</h1>}[m
+[32m+[m[32m      {children}[m
+     </div>[m
+[31m-  );[m
+[32m+[m[32m  )[m
+ }[m
+ [m
+[31m-Card.propTypes = {[m
+[31m-  children: PropTypes.node.isRequired,[m
+[31m-};[m
+[31m-[m
+[31m-export default Card;[m
+[32m+[m[32mexport default Card[m
+[1mdiff --git a/src/components/Card/style.css b/src/components/Card/style.css[m
+[1mindex f958727..2cd0292 100644[m
+[1m--- a/src/components/Card/style.css[m
+[1m+++ b/src/components/Card/style.css[m
+[36m@@ -1,34 +1,12 @@[m
+[31m-/* src/components/Card/style.css */[m
+[31m-.custom-card {[m
+[31m-  background-color: var(--background-card); /* Usando variável de cor */[m
+[31m-  padding: 40px 30px; /* Mais padding vertical que horizontal */[m
+[31m-  border-radius: 10px;[m
+[31m-  width: 450px; /* Largura fixa como na imagem */[m
+[31m-  max-width: 90%; /* Evita que fique muito largo em telas pequenas */[m
+[31m-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra suave */[m
+[31m-  box-sizing: border-box;[m
+[31m-[m
+[31m-  /* Para organizar os itens internos (título, inputs, botão) */[m
+[32m+[m[32m.card { /*onde estão agrupados os inputs e botões*/[m
+[32m+[m[32m  color: #ffffff;[m
+[32m+[m[32m  background-color: #5d7783;[m
+   display: flex;[m
+   flex-direction: column;[m
+[31m-  align-items: center; /* Centraliza itens internos horizontalmente */[m
+[31m-  gap: 25px; /* Espaçamento entre os itens */[m
+[31m-}[m
+[31m-[m
+[31m-/* Estilo específico para o H1 dentro do Card */[m
+[31m-.custom-card h1 {[m
+[31m-  color: var(--text-light); /* Texto branco */[m
+[31m-  font-size: 1.5em; /* Tamanho do título */[m
+[31m-  font-weight: 600; /* Peso da fonte */[m
+[31m-  margin-bottom: 10px; /* Espaço extra abaixo do título */[m
+[31m-  text-align: center;[m
+[31m-}[m
+[31m-[m
+[31m-/* Faz o formulário (se houver) ocupar a largura interna */[m
+[31m-.custom-card form {[m
+[31m-    width: 100%;[m
+[31m-    display: flex;[m
+[31m-    flex-direction: column;[m
+[31m-    align-items: center;[m
+[31m-    gap: 20px; /* Espaço entre inputs/botão dentro do form */[m
+[31m-}[m
+\ No newline at end of file[m
+[32m+[m[32m  gap: 30px;    /*espaço entre inputs*/[m
+[32m+[m[32m  padding: 30px;  /*espaço cinza de cadastro*/[m
+[32m+[m[32m  border-radius: 10px;  /*arredondamento do espaço cinza*/[m
+[32m+[m[32m  /*max-width: 50%;*/[m
+[32m+[m[32m  width: 400px;[m
+[32m+[m[32m  margin-bottom: 20px;[m
+[32m+[m[32m  }[m
+[1mdiff --git a/src/components/Form/index.jsx b/src/components/Form/index.jsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4770355[m
+[1m--- /dev/null[m
+[1m+++ b/src/components/Form/index.jsx[m
+[36m@@ -0,0 +1,11 @@[m
+[32m+[m[32mimport './style.css'[m
+[32m+[m[32m/*é a espécie de um container cc. a única finalidade de guardar todos os inputs criados*/[m
+[32m+[m[32mfunction Form({children}) {[m
+[32m+[m[32m  return ([m[41m      [m
+[32m+[m[32m    <form className='form'>[m
+[32m+[m[32m      {children}[m
+[32m+[m[32m    </form>[m
+[32m+[m[32m  )[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport default Form[m
+[1mdiff --git a/src/components/Form/style.css b/src/components/Form/style.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..632cb9f[m
+[1m--- /dev/null[m
+[1m+++ b/src/components/Form/style.css[m
+[36m@@ -0,0 +1,6 @@[m
+[32m+[m[32m.form { /*onde estão agrupados os inputs e botões*/[m
+[32m+[m[32m  color: #ffffff;[m
+[32m+[m[32m  display: flex;[m
+[32m+[m[32m  flex-direction: column;[m
+[32m+[m[32m  gap: 30px;    /*espaço entre inputs*/[m
+[32m+[m[32m}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/components/Input/index.jsx b/src/components/Input/index.jsx[m
+[1mindex 3ec7a6c..cf02faf 100644[m
+[1m--- a/src/components/Input/index.jsx[m
+[1m+++ b/src/components/Input/index.jsx[m
+[36m@@ -1,22 +1,10 @@[m
+[31m-import PropTypes from 'prop-types';[m
+[31m-import './style.css';[m
+[32m+[m[32mimport './style.css'[m
+[32m+[m
+[32m+[m[32mfunction Input({placeholder, type = 'text', name}) {[m
+ [m
+[31m-function Input({ type = 'text', placeholder, name, ...rest }) {[m
+   return ([m
+[31m-    <input[m
+[31m-      className="custom-input" [m
+[31m-      type={type}[m
+[31m-      placeholder={placeholder}[m
+[31m-      name={name}[m
+[31m-      {...rest} [m
+[31m-    />[m
+[31m-  );[m
+[32m+[m[32m    <input className='input' placeholder={placeholder} name={name} type={type} />[m
+[32m+[m[32m  )[m
+ }[m
+ [m
+[31m-Input.propTypes = {[m
+[31m-  type: PropTypes.string,[m
+[31m-  placeholder: PropTypes.string,[m
+[31m-  name: PropTypes.string.isRequired[m
+[31m-};[m
+[31m-[m
+[31m-export default Input;[m
+\ No newline at end of file[m
+[32m+[m[32mexport default Input[m
+[1mdiff --git a/src/components/Input/style.css b/src/components/Input/style.css[m
+[1mindex 6d63b81..e585309 100644[m
+[1m--- a/src/components/Input/style.css[m
+[1m+++ b/src/components/Input/style.css[m
+[36m@@ -1,22 +1,10 @@[m
+[31m-/* src/components/Input/style.css */[m
+[31m-.custom-input {[m
+[31m-  background-color: var(--background-input); /* Branco */[m
+[31m-  color: var(--text-dark); /* Texto escuro */[m
+[32m+[m[32m.input {[m
+[32m+[m[32m  background-color: #ffffff;[m
+[32m+[m[32m  color: #0c0f0a;[m
+   border: none;[m
+[31m-  border-radius: 30px; /* Bem arredondado */[m
+[31m-  height: 50px; /* Um pouco mais alto que antes */[m
+[31m-  font-size: 1rem; /* Tamanho de fonte padrão */[m
+[31m-  padding: 0 20px; /* Padding interno horizontal */[m
+[31m-  outline: none;[m
+[31m-  width: 100%; /* Ocupa toda a largura disponível no container pai (form/card) */[m
+[31m-  box-sizing: border-box;[m
+[31m-}[m
+[31m-[m
+[31m-.custom-input::placeholder {[m
+[31m-  color: var(--text-placeholder); /* Cor do placeholder */[m
+[31m-}[m
+[31m-[m
+[31m-.custom-input:focus {[m
+[31m-  /* Opcional: Efeito visual ao focar */[m
+[31m-  box-shadow: 0 0 0 2px rgba(99, 185, 149, 0.5); /* Sombra verde clara */[m
+[32m+[m[32m  border-radius: 30px;[m
+[32m+[m[32m  height: 40px;[m
+[32m+[m[32m  font-size: 16px;[m
+[32m+[m[32m  padding-left: 10px;[m
+[32m+[m[32m  outline: none;[m[41m  [m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/src/components/Logo/index.jsx b/src/components/Logo/index.jsx[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/components/Logo/style.css b/src/components/Logo/style.css[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/components/MacroCard/index.jsx b/src/components/MacroCard/index.jsx[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/components/MacroCard/style.css b/src/components/MacroCard/style.css[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/components/Sidebar/index.jsx b/src/components/Sidebar/index.jsx[m
+[1mdeleted file mode 100644[m
+[1mindex a266d11..0000000[m
+[1m--- a/src/components/Sidebar/index.jsx[m
+[1m+++ /dev/null[m
+[36m@@ -1,72 +0,0 @@[m
+[31m-import "./style.css"; [m
+[31m-import { NavLink } from "react-router-dom";[m
+[31m-[m
+[31m-[m
+[31m-import iconPerfil from "../../assets/do-utilizador.png";[m
+[31m-import iconCalculos from "../../assets/calculadora.png";[m
+[31m-import iconMacros from "../../assets/fatia-de-bolo.png"; [m
+[31m-import iconHistorico from "../../assets/historia.png";[m
+[31m-// Faltando o ícone do Logo, vou usar texto por enquanto[m
+[31m-[m
+[31m-export default function Sidebar() {[m
+[31m-[m
+[31m-  return ([m
+[31m-<aside className="sidebar-container">[m
+[31m-  <div className="logo-container"> {/* <- AQUI */}[m
+[31m-    <img className="logo-img" src="/src/assets/Logo2.png" alt="Logo" />[m
+[31m-  </div>[m
+[31m-[m
+[31m-  <nav className="sidebar-nav">[m
+[31m-    <ul>[m
+[31m-      <li>[m
+[31m-        <NavLink[m
+[31m-          to="/perfil"[m
+[31m-          className={({ isActive }) =>[m
+[31m-            isActive ? "nav-link active" : "nav-link"[m
+[31m-          }[m
+[31m-        >[m
+[31m-          <img src={iconPerfil} alt="Perfil" />[m
+[31m-          <span>Perfil</span>[m
+[31m-        </NavLink>[m
+[31m-      </li>[m
+[31m-[m
+[31m-      <li>[m
+[31m-        <NavLink[m
+[31m-          to="/calculos"[m
+[31m-          className={({ isActive }) =>[m
+[31m-            isActive ? "nav-link active" : "nav-link"[m
+[31m-          }[m
+[31m-        >[m
+[31m-          <img src={iconCalculos} alt="Cálculos" />[m
+[31m-          <span>Cálculos</span>[m
+[31m-        </NavLink>[m
+[31m-      </li>[m
+[31m-[m
+[31m-      <li>[m
+[31m-        <NavLink[m
+[31m-          to="/macros"[m
+[31m-          className={({ isActive }) =>[m
+[31m-            isActive ? "nav-link active" : "nav-link"[m
+[31m-          }[m
+[31m-        >[m
+[31m-          <img src={iconMacros} alt="Macros" />[m
+[31m-          <span>Macros</span>[m
+[31m-        </NavLink>[m
+[31m-      </li>[m
+[31m-[m
+[31m-      <li>[m
+[31m-        <NavLink[m
+[31m-          to="/historico"[m
+[31m-          className={({ isActive }) =>[m
+[31m-            isActive ? "nav-link active" : "nav-link"[m
+[31m-          }[m
+[31m-        >[m
+[31m-          <img src={iconHistorico} alt="Histórico" />[m
+[31m-          <span>Histórico</span>[m
+[31m-        </NavLink>[m
+[31m-      </li>[m
+[31m-    </ul>[m
+[31m-  </nav>[m
+[31m-</aside>[m
+[31m-  );[m
+[31m-}[m
+[1mdiff --git a/src/components/Sidebar/style.css b/src/components/Sidebar/style.css[m
+[1mdeleted file mode 100644[m
+[1mindex 145ff93..0000000[m
+[1m--- a/src/components/Sidebar/style.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,76 +0,0 @@[m
+[31m-/* src/components/Sidebar/style.css */[m
+[31m-.sidebar-container {[m
+[31m-  width: 260px;[m
+[31m-  height: 100vh;[m
+[31m-  background-color: #ffffff;[m
+[31m-  border-right: 1px solid #f0f0f0;[m
+[31m-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);[m
+[31m-  display: flex;[m
+[31m-  flex-direction: column;[m
+[31m-  padding: 20px;[m
+[31m-  box-sizing: border-box;[m
+[31m-  position: sticky;[m
+[31m-  top: 0;[m
+[31m-}[m
+[31m-[m
+[31m-/* 1. RENOMEIE ESTA CLASSE */[m
+[31m-.logo-container {[m
+[31m-  padding: 10px;[m
+[31m-  margin-bottom: 30px; /* 2. CORRIJA PARA 'px' */[m
+[31m-  text-align: center;[m
+[31m-}[m
+[31m-[m
+[31m-.logo-img {[m
+[31m-  width: 130px; /* Você definiu 130px aqui, ok */[m
+[31m-  max-width: 100%;[m
+[31m-  height: auto;[m
+[31m-  object-fit: contain;[m
+[31m-  display: inline-block;[m
+[31m-}[m
+[31m-[m
+[31m-.sidebar-nav ul {[m
+[31m-  list-style: none;[m
+[31m-  padding: 0;[m
+[31m-  margin: 0;[m
+[31m-  display: flex;[m
+[31m-  flex-direction: column;[m
+[31m-  gap: 10px;[m
+[31m-  /* 3. REMOVA ou comente esta linha: */[m
+[31m-  /* margin-top: -60px; */[m
+[31m-}[m
+[31m-[m
+[31m-/* ... (O resto do CSS continua igual) ... */[m
+[31m-[m
+[31m-.sidebar-nav li {[m
+[31m-  margin: 0;[m
+[31m-}[m
+[31m-[m
+[31m-.nav-link {[m
+[31m-  display: flex;[m
+[31m-  align-items: center;[m
+[31m-  padding: 15px;[m
+[31m-  border-radius: 8px;[m
+[31m-  text-decoration: none;[m
+[31m-  font-weight: 500;[m
+[31m-  color: #5d7783;[m
+[31m-  transition: background-color 0.2s, color 0.2s;[m
+[31m-}[m
+[31m-[m
+[31m-.nav-link img {[m
+[31m-  width: 22px;[m
+[31m-  height: 22px;[m
+[31m-  margin-right: 15px;[m
+[31m-}[m
+[31m-[m
+[31m-.nav-link:hover {[m
+[31m-  background-color: #f5f5f5;[m
+[31m-}[m
+[31m-[m
+[31m-.nav-link.active {[m
+[31m-  background-color: var(--background-button, #63b995);[m
+[31m-  color: var(--text-light, #ffffff);[m
+[31m-}[m
+[31m-[m
+[31m-.nav-link.active img {[m
+[31m-  filter: brightness(0) invert(1);[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/components/StatCard/index.jsx b/src/components/StatCard/index.jsx[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/components/StatCard/style.css b/src/components/StatCard/style.css[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/components/layouts/DashboardLayout.css b/src/components/layouts/DashboardLayout.css[m
+[1mdeleted file mode 100644[m
+[1mindex 7eb22ce..0000000[m
+[1m--- a/src/components/layouts/DashboardLayout.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,13 +0,0 @@[m
+[31m-.dashboard-layout {[m
+[31m-  display: flex;[m
+[31m-  width: 100%;[m
+[31m-}[m
+[31m-[m
+[31m-.dashboard-content {[m
+[31m-  flex: 1;[m
+[31m-  padding: 40px;[m
+[31m-  box-sizing: border-box;[m
+[31m-  height: 100vh;[m
+[31m-  overflow-y: auto;[m
+[31m-  background-color: #f9f9f9;[m
+[31m-}[m
+[1mdiff --git a/src/components/layouts/DashboardLayout.jsx b/src/components/layouts/DashboardLayout.jsx[m
+[1mdeleted file mode 100644[m
+[1mindex 84d1857..0000000[m
+[1m--- a/src/components/layouts/DashboardLayout.jsx[m
+[1m+++ /dev/null[m
+[36m@@ -1,17 +0,0 @@[m
+[31m-import { Outlet } from 'react-router-dom';[m
+[31m-import Sidebar from '../Sidebar'; [m
+[31m-import './DashboardLayout.css';   [m
+[31m-[m
+[31m-export default function DashboardLayout() {[m
+[31m-  return ([m
+[31m-    <div className="dashboard-layout">[m
+[31m-      {/* 1. A Sidebar fica fixa à esquerda */}[m
+[31m-      <Sidebar />[m
+[31m-[m
+[31m-      {/* 2. O <Outlet> renderiza o conteúdo da rota "filha" (ex: /perfil) */}[m
+[31m-      <main className="dashboard-content">[m
+[31m-        <Outlet />[m
+[31m-      </main>[m
+[31m-    </div>[m
+[31m-  );[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/components/layouts/style.css b/src/components/layouts/style.css[m
+[1mdeleted file mode 100644[m
+[1mindex 7eb22ce..0000000[m
+[1m--- a/src/components/layouts/style.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,13 +0,0 @@[m
+[31m-.dashboard-layout {[m
+[31m-  display: flex;[m
+[31m-  width: 100%;[m
+[31m-}[m
+[31m-[m
+[31m-.dashboard-content {[m
+[31m-  flex: 1;[m
+[31m-  padding: 40px;[m
+[31m-  box-sizing: border-box;[m
+[31m-  height: 100vh;[m
+[31m-  overflow-y: auto;[m
+[31m-  background-color: #f9f9f9;[m
+[31m-}[m
+[1mdiff --git a/src/index.css b/src/index.css[m
+[1mindex 8f8f77b..e95e724 100644[m
+[1m--- a/src/index.css[m
+[1m+++ b/src/index.css[m
+[36m@@ -1,43 +1,14 @@[m
+[31m-/* src/index.css */[m
+[31m-:root {[m
+[31m-  font-family: "Noto Sans", sans-serif; /* Mantém sua fonte */[m
+[31m-  color: #0C0F0A; /* Cor de texto padrão (escura) */[m
+[31m-[m
+[31m-  /* Cores - úteis para referência */[m
+[31m-  --background-page: #EBF4FE; /* Azul claro do fundo */[m
+[31m-  --background-card: #5d7783; /* Cinza-azulado do card */[m
+[31m-  --background-input: #ffffff; /* Branco dos inputs */[m
+[31m-  --background-button: #63b995; /* Verde do botão */[m
+[31m-  --text-light: #ffffff; /* Texto branco */[m
+[31m-  --text-dark: #0C0F0A; /* Texto escuro */[m
+[31m-  --text-placeholder: #888; /* Cinza para placeholder */[m
+[32m+[m[32m:root {[m[41m   [m
+[32m+[m[32m  font-family: "Noto Sans", sans-serif;;[m
+[32m+[m[32m  color-scheme: light dark;[m
+[32m+[m[32m  color: #0C0F0A;[m
+[32m+[m[32m  background-color: #EBF4FE;[m
+ }[m
+[31m-[m
+[32m+[m[41m [m
+ body {[m
+[31m-  margin: 0; /* Remove margens padrão */[m
+[31m-  padding: 0; /* Remove paddings padrão */[m
+[31m-  background-color: var(--background-page); /* Cor de fundo da página */[m
+[31m-  display: flex; /* Habilita flexbox */[m
+[31m-  justify-content: center; /* Centraliza horizontalmente */[m
+[31m-  align-items: center; /* Centraliza verticalmente */[m
+[31m-  min-height: 100vh; /* Garante que o body ocupe a altura toda da tela */[m
+[31m-  box-sizing: border-box;[m
+[31m-}[m
+[31m-[m
+[31m-/* Garante que o container principal ocupe espaço para centralização funcionar */[m
+[31m-#root {[m
+[31m-  width: 100%;[m
+[31m-  display: flex;[m
+[31m-  justify-content: center;[m
+[31m-  align-items: center;[m
+[31m-}[m
+[31m-[m
+[31m-/* Remove estilos padrão que podem atrapalhar */[m
+[31m-h1, p {[m
+   margin: 0;[m
+[32m+[m[32m  display: flex;[m
+[32m+[m[32m  place-items: center;[m
+[32m+[m[32m  min-width: 320px;[m
+[32m+[m[32m  min-height: 100vh;[m
+ }[m
+[31m-[m
+[31m-button, input {[m
+[31m-  font-family: inherit; /* Garante que usem a fonte Noto Sans */[m
+[31m-  box-sizing: border-box; /* Inclui padding e borda no tamanho total */[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/main.jsx b/src/main.jsx[m
+[1mindex 9841715..eb184fa 100644[m
+[1m--- a/src/main.jsx[m
+[1m+++ b/src/main.jsx[m
+[36m@@ -1,40 +1,21 @@[m
+[31m-// src/main.jsx[m
+[32m+[m[32mimport { StrictMode } from 'react'[m
+[32m+[m[32mimport { createRoot } from 'react-dom/client'[m
+[32m+[m[32mimport Login from './pages/Login'[m
+[32m+[m[32mimport Register from './pages/Register'[m
+[32m+[m[32mimport './index.css'    //estilos globais, aplicado em todo o programa[m
+ [m
+[31m-import { StrictMode } from 'react';[m
+[31m-import { createRoot } from 'react-dom/client';[m
+[31m-import { BrowserRouter, Routes, Route } from 'react-router-dom';[m
+[31m-import './index.css';[m
+[31m-import DashboardLayout from './components/layouts/DashboardLayout';[m
+[31m-[m
+[31m-// 1. CORRIJA OS CAMINHOS DOS IMPORTS[m
+[31m-import Login from './pages/Login/index'; // Aponta para Login.jsx dentro da pasta Login[m
+[31m-import CriarConta from './pages/CriarConta/CriarConta'; [m
+[31m-import Perfil from './pages/Perfil/index';      [m
+[31m-import Calculos from './pages/Calculos/Calculos';    [m
+[31m-import Macros from './pages/Macros/Macros';       [m
+ [m
+ createRoot(document.getElementById('root')).render([m
+   <StrictMode>[m
+[31m-    <BrowserRouter>[m
+[31m-      <Routes>[m
+[31m-        {/* --- Rotas Públicas (sem Sidebar) --- */}[m
+[31m-        {/* (Mais tarde, podemos envolvê-las no AuthLayout) */}[m
+[31m-        <Route path="/" element={<Login />} />[m
+[31m-        {/* 2. ADICIONE A ROTA PARA CRIAR CONTA AQUI FORA */}[m
+[31m-        <Route path="/criar-conta" element={<CriarConta />} />[m
+[32m+[m[32m    <Login />[m
+[32m+[m[32m  </StrictMode>,[m
+[32m+[m[32m)[m
+ [m
+[31m-        {/* --- Rotas Privadas (COM Sidebar) --- */}[m
+[31m-        <Route element={<DashboardLayout />}>[m
+[31m-          {/* Todas as rotas aqui dentro serão renderizadas onde está o <Outlet /> */}[m
+[31m-          <Route path="/perfil" element={<Perfil />} />[m
+[31m-          {/* 3. ADICIONE AS OUTRAS ROTAS PRIVADAS AQUI DENTRO */}[m
+[31m-          <Route path="/calculos" element={<Calculos />} />[m
+[31m-          <Route path="/macros" element={<Macros />} />[m
+[31m-        </Route>[m
+ [m
+[31m-        {/* Rota para página não encontrada */}[m
+[31m-        <Route path="*" element={<div>Erro 404: Página não encontrada!</div>} />[m
+[31m-      </Routes>[m
+[31m-    </BrowserRouter>[m
+[32m+[m[32m/*[m
+[32m+[m[32mcreateRoot(document.getElementById('root')).render([m
+[32m+[m[32m  <StrictMode>[m
+[32m+[m[32m    <Register/>[m
+   </StrictMode>[m
+[31m-);[m
+\ No newline at end of file[m
+[32m+[m[32m)[m
+[32m+[m[32m*/[m
+\ No newline at end of file[m
+[1mdiff --git a/src/pages/Calculos/Calculos.css b/src/pages/Calculos/Calculos.css[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/pages/Calculos/Calculos.jsx b/src/pages/Calculos/Calculos.jsx[m
+[1mdeleted file mode 100644[m
+[1mindex ac3c72d..0000000[m
+[1m--- a/src/pages/Calculos/Calculos.jsx[m
+[1m+++ /dev/null[m
+[36m@@ -1,8 +0,0 @@[m
+[31m-export default function Calculos() {[m
+[31m-  return ([m
+[31m-    <div>[m
+[31m-      <h1>Página de calculos</h1>[m
+[31m-      <p>Esta página está em construção.</p>[m
+[31m-    </div>[m
+[31m-  );[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/pages/CriarConta/CriarConta.css b/src/pages/CriarConta/CriarConta.css[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/pages/CriarConta/CriarConta.jsx b/src/pages/CriarConta/CriarConta.jsx[m
+[1mdeleted file mode 100644[m
+[1mindex 3d8db86..0000000[m
+[1m--- a/src/pages/CriarConta/CriarConta.jsx[m
+[1m+++ /dev/null[m
+[36m@@ -1,8 +0,0 @@[m
+[31m-export default function Perfil() {[m
+[31m-  return ([m
+[31m-    <div>[m
+[31m-      <h1>Página de Perfil</h1>[m
+[31m-      <p>Esta página está em construção.</p>[m
+[31m-    </div>[m
+[31m-  );[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/pages/Login/index.jsx b/src/pages/Login/index.jsx[m
+[1mindex 66a131e..8c5608f 100644[m
+[1m--- a/src/pages/Login/index.jsx[m
+[1m+++ b/src/pages/Login/index.jsx[m
+[36m@@ -1,33 +1,21 @@[m
+[31m-// Importar os novos componentes[m
+[31m-import Input from "../../components/Input";[m
+[31m-import Botao from "../../components/Botao";[m
+[31m-import Card from "../../components/Card"; [m
+[31m-import "./style.css"; [m
+[32m+[m[32mimport './style.css'[m
+[32m+[m[32mimport Button from '../../components/Button'[m
+[32m+[m[32mimport Input from '../../components/Input'[m
+[32m+[m[32mimport Card from '../../components/Card'[m
+[32m+[m[32mimport Form from '../../components/Form'[m
+ [m
+[31m-function Login() {[m
+[31m-  return ([m
+[31m-    <div className="container">[m
+[31m-      {" "}[m
+[31m-      {/* Pode ser que precise ajustar este container */}[m
+[31m-      {/* Usar o Card para envolver o formulário */}[m
+[31m-      <Card>[m
+[31m-        {/* Usar <form> se fizer sentido semântico, ou só a div do Card */}[m
+[31m-        <form /* onSubmit={suaFuncaoDeSubmit} */>[m
+[31m-          <h1>Faça seu cadastro {/* Ou Login, dependendo da tela */}</h1>[m
+[31m-          {/* Usar os componentes Input e Botao */}[m
+[31m-          <Input placeholder="Nome" name="nome" type="text" />[m
+[31m-          <Input placeholder="Email" name="email" type="email" />[m
+[31m-          <Input placeholder="Senha" name="pass" type="password" />[m
+[32m+[m[32mfunction Login() {    //componente React sempre função com letra M. como uma classe[m
+ [m
+[31m-          <Botao type="submit">[m
+[31m-            {" "}[m
+[31m-            {/* Mudar type para submit se for um form */}[m
+[31m-            Cadastrar {/* Ou Entrar */}[m
+[31m-          </Botao>[m
+[31m-        </form>[m
+[31m-      </Card>[m
+[31m-    </div>[m
+[31m-  );[m
+[32m+[m[32m  //acima de return vai o JS bruto[m
+[32m+[m[32m  return (      //vai ter um return que sempre vai ser html; p colocar js se usa {}[m[41m [m
+[32m+[m[32m    <Card title='Acessar conta'>[m
+[32m+[m[32m      <Form>[m
+[32m+[m[32m        <Input placeholder='Email' name='email' type='email' />[m
+[32m+[m[32m        <Input placeholder='Senha' name='pass' type='password' />[m
+[32m+[m[32m        <Button text='Entrar' type='submit'></Button>[m
+[32m+[m[32m      </Form>[m
+[32m+[m[32m    </Card>[m
+[32m+[m[32m  )[m
+ }[m
+ [m
+[31m-export default Login;[m
+\ No newline at end of file[m
+[32m+[m[32mexport default Login[m
+[1mdiff --git a/src/pages/Login/style.css b/src/pages/Login/style.css[m
+[1mindex 32e88c3..3fd5533 100644[m
+[1m--- a/src/pages/Login/style.css[m
+[1m+++ b/src/pages/Login/style.css[m
+[36m@@ -1,4 +1,6 @@[m
+[31m-[m
+[31m-.login-page-container {[m
+[31m-  width: 100%;[m
+[31m-}[m
+\ No newline at end of file[m
+[32m+[m[32m#root {[m
+[32m+[m[32m  max-width: 1280px;[m
+[32m+[m[32m  margin: 0 auto;[m
+[32m+[m[32m  padding: 2rem; /*TESTAR RETIRADA*/[m
+[32m+[m[32m  text-align: center;[m
+[32m+[m[32m}[m
+[1mdiff --git a/src/pages/Macros/Macros.css b/src/pages/Macros/Macros.css[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/src/pages/Macros/Macros.jsx b/src/pages/Macros/Macros.jsx[m
+[1mdeleted file mode 100644[m
+[1mindex 0d1ec95..0000000[m
+[1m--- a/src/pages/Macros/Macros.jsx[m
+[1m+++ /dev/null[m
+[36m@@ -1,8 +0,0 @@[m
+[31m-export default function Macros() {[m
+[31m-  return ([m
+[31m-    <div>[m
+[31m-      <h1>Página de Macros</h1>[m
+[31m-      <p>Esta página está em construção.</p>[m
+[31m-    </div>[m
+[31m-  );[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/pages/Perfil/index.jsx b/src/pages/Perfil/index.jsx[m
+[1mdeleted file mode 100644[m
+[1mindex 13924d3..0000000[m
+[1m--- a/src/pages/Perfil/index.jsx[m
+[1m+++ /dev/null[m
+[36m@@ -1,105 +0,0 @@[m
+[31m-import { useState } from "react";[m
+[31m-import PropTypes from 'prop-types';[m
+[31m-import Botao from "../../components/Botao";[m
+[31m-import "./style.css";[m
+[31m-[m
+[31m-import iconBmi from "../../assets/fogo.png";[m
+[31m-import iconWeight from "../../assets/peso.png";[m
+[31m-import iconUser from "../../assets/do-utilizador.png";[m
+[31m-[m
+[31m-function InfoItem({ label, value }) {[m
+[31m-  return ([m
+[31m-    <div className="info-item">[m
+[31m-      <span className="info-label">{label}</span>[m
+[31m-      <span className="info-value">{value}</span>[m
+[31m-    </div>[m
+[31m-  );[m
+[31m-}[m
+[31m-[m
+[31m-InfoItem.propTypes = {[m
+[31m-  label: PropTypes.string.isRequired,[m
+[31m-  value: PropTypes.string.isRequired,[m
+[31m-};[m
+[31m-[m
+[31m-export default function Perfil() {[m
+[31m-  // Dados mockados, iguais aos da imagem[m
+[31m-  const [userData] = useState({[m
+[31m-    nome: "Usuário Exemplo",[m
+[31m-    email: "jassinto@laranja.com",[m
+[31m-    sexo: "Masculino",[m
+[31m-    idade: "93 anos",[m
+[31m-    peso: "70 kg",[m
+[31m-    altura: "175 cm",[m
+[31m-    objetivo: "Manter Peso",[m
+[31m-    imc: "22.9",[m
+[31m-  });[m
+[31m-[m
+[31m-  const handleEdit = () => {[m
+[31m-    // TODO: Implementar lógica para abrir o modo de edição[m
+[31m-    console.log("Clicou em Editar Dados");[m
+[31m-  };[m
+[31m-[m
+[31m-  const handleLogout = () => {[m
+[31m-    // TODO: Implementar lógica de logout[m
+[31m-    console.log("Clicou em Sair da conta");[m
+[31m-  };[m
+[31m-[m
+[31m-  return ([m
+[31m-    <div className="perfil-container">[m
+[31m-      <h1 className="perfil-greeting">Olá, {userData.nome.split(" ")[0]}!</h1>[m
+[31m-[m
+[31m-      {/* --- Cards de Stats (IMC e Peso) --- */}[m
+[31m-      <div className="stat-cards-container">[m
+[31m-        <div className="stat-card">[m
+[31m-          <img src={iconBmi} alt="IMC" />[m
+[31m-          <div className="stat-info">[m
+[31m-            <span className="stat-label">IMC Atual</span>[m
+[31m-            <span className="stat-value">{userData.imc}</span>[m
+[31m-          </div>[m
+[31m-        </div>[m
+[31m-        <div className="stat-card">[m
+[31m-          <img src={iconWeight} alt="Peso" />[m
+[31m-          <div className="stat-info">[m
+[31m-            <span className="stat-label">Peso Atual</span>[m
+[31m-            <span className="stat-value">{userData.peso}</span>[m
+[31m-          </div>[m
+[31m-        </div>[m
+[31m-      </div>[m
+[31m-[m
+[31m-      {/* --- Card Principal (Minhas Informações) --- */}[m
+[31m-      <div className="info-card">[m
+[31m-        <div className="info-header">[m
+[31m-          <img src={iconUser} alt="Minhas Informações" />[m
+[31m-          <h2>Minhas Informações</h2>[m
+[31m-        </div>[m
+[31m-[m
+[31m-        <div className="info-list">[m
+[31m-          <InfoItem label="Nome" value={userData.nome} />[m
+[31m-          <InfoItem label="E-mail" value={userData.email} />[m
+[31m-          <InfoItem label="Sexo" value={userData.sexo} />[m
+[31m-          <InfoItem label="Idade" value={userData.idade} />[m
+[31m-          <InfoItem label="Peso" value={userData.peso} />[m
+[31m-          <InfoItem label="Altura" value={userData.altura} />[m
+[31m-          <InfoItem label="Objetivo" value={userData.objetivo} />[m
+[31m-        </div>[m
+[31m-[m
+[31m-        {/* Usamos o componente Botao, mas aplicamos um estilo para[m
+[31m-            encaixar no rodapé do card */}[m
+[31m-<Botao[m
+[31m-          type="button"[m
+[31m-          onClick={handleEdit}[m
+[31m-          className="perfil-edit-button"[m
+[31m-        >[m
+[31m-          Editar Dados[m
+[31m-        </Botao>[m
+[31m-     [m
+[31m-      </div>[m
+[31m-[m
+[31m-      {/* --- Botão de Logout --- */}[m
+[31m-      <button className="logout-button" onClick={handleLogout}>[m
+[31m-        {/* Não temos o ícone de saída */}[m
+[31m-        Sair da conta[m
+[31m-      </button>[m
+[31m-    </div>[m
+[31m-  );[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/pages/Perfil/style.css b/src/pages/Perfil/style.css[m
+[1mdeleted file mode 100644[m
+[1mindex 5e4b237..0000000[m
+[1m--- a/src/pages/Perfil/style.css[m
+[1m+++ /dev/null[m
+[36m@@ -1,160 +0,0 @@[m
+[31m-/* src/pages/Perfil/style.css */[m
+[31m-[m
+[31m-/* Cor de fundo verde-claro dos cards de stat (da imagem) */[m
+[31m-:root {[m
+[31m-  --light-green-bg: #f0fbf5;[m
+[31m-  --light-green-border: #d6f2e4;[m
+[31m-  --text-gray: #5d7783;[m
+[31m-}[m
+[31m-[m
+[31m-.perfil-container {[m
+[31m-  width: 100%;[m
+[31m-  max-width: 900px;[m
+[31m-  margin: 0 auto;[m
+[31m-}[m
+[31m-[m
+[31m-.perfil-greeting {[m
+[31m-  font-size: 2rem;[m
+[31m-  font-weight: 700;[m
+[31m-  color: var(--text-dark);[m
+[31m-  margin-bottom: 25px;[m
+[31m-}[m
+[31m-[m
+[31m-/* --- Stats Cards (IMC e Peso) --- */[m
+[31m-.stat-cards-container {[m
+[31m-  display: grid;[m
+[31m-  grid-template-columns: 1fr 1fr;[m
+[31m-  gap: 20px;[m
+[31m-  margin-bottom: 25px;[m
+[31m-}[m
+[31m-[m
+[31m-.stat-card {[m
+[31m-  display: flex;[m
+[31m-  align-items: center;[m
+[31m-  gap: 15px;[m
+[31m-  background-color: var(--light-green-bg);[m
+[31m-  border: 1px solid var(--light-green-border);[m
+[31m-  padding: 20px;[m
+[31m-  border-radius: 8px;[m
+[31m-}[m
+[31m-[m
+[31m-.stat-card img {[m
+[31m-  width: 24px;[m
+[31m-  height: 24px;[m
+[31m-  /* Cor dos ícones da imagem é verde, o nosso é preto.[m
+[31m-     Podemos usar filtro para aproximar, mas idealmente seriam SVGs */[m
+[31m-  filter: invert(55%) sepia(43%) saturate(541%) hue-rotate(101deg)[m
+[31m-    brightness(93%) contrast(88%);[m
+[31m-}[m
+[31m-[m
+[31m-.stat-info {[m
+[31m-  display: flex;[m
+[31m-  flex-direction: column;[m
+[31m-}[m
+[31m-[m
+[31m-.stat-label {[m
+[31m-  font-size: 0.9rem;[m
+[31m-  color: var(--text-gray);[m
+[31m-  font-weight: 500;[m
+[31m-}[m
+[31m-[m
+[31m-.stat-value {[m
+[31m-  font-size: 1.25rem;[m
+[31m-  color: var(--text-dark);[m
+[31m-  font-weight: 700;[m
+[31m-}[m
+[31m-[m
+[31m-/* --- Info Card (Minhas Informações) --- */[m
+[31m-.info-card {[m
+[31m-  background-color: #ffffff;[m
+[31m-  border-radius: 8px;[m
+[31m-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);[m
+[31m-  overflow: hidden; /* Para o botão no rodapé se ajustar */[m
+[31m-}[m
+[31m-[m
+[31m-.info-header {[m
+[31m-  display: flex;[m
+[31m-  align-items: center;[m
+[31m-  gap: 12px;[m
+[31m-  padding: 20px;[m
+[31m-  border-bottom: 1px solid #f0f0f0;[m
+[31m-}[m
+[31m-[m
+[31m-.info-header img {[m
+[31m-  width: 22px;[m
+[31m-  height: 22px;[m
+[31m-  filter: invert(44%) sepia(18%) saturate(601%) hue-rotate(156deg)[m
+[31m-    brightness(91%) contrast(88%);[m
+[31m-}[m
+[31m-[m
+[31m-.info-header h2 {[m
+[31m-  margin: 0;[m
+[31m-  font-size: 1.1rem;[m
+[31m-  font-weight: 600;[m
+[31m-  color: var(--text-gray);[m
+[31m-}[m
+[31m-[m
+[31m-.info-list {[m
+[31m-  display: flex;[m
+[31m-  flex-direction: column;[m
+[31m-  padding: 10px 20px;[m
+[31m-}[m
+[31m-[m
+[31m-.info-item {[m
+[31m-  display: flex;[m
+[31m-  justify-content: space-between;[m
+[31m-  align-items: center;[m
+[31m-  padding: 18px 0;[m
+[31m-  border-bottom: 1px solid #f0f0f0;[m
+[31m-  font-size: 0.95rem;[m
+[31m-}[m
+[31m-[m
+[31m-.info-list .info-item:last-child {[m
+[31m-  border-bottom: none;[m
+[31m-}[m
+[31m-[m
+[31m-.info-label {[m
+[31m-  color: var(--text-gray);[m
+[31m-  font-weight: 500;[m
+[31m-}[m
+[31m-[m
+[31m-.info-value {[m
+[31m-  color: var(--text-dark);[m
+[31m-  font-weight: 600;[m
+[31m-}[m
+[31m-[m
+[31m-/* --- Botões --- */[m
+[31m-[m
+[31m-/*[m
+[31m-  Sobrescrevemos o estilo do componente .custom-button[m
+[31m-  apenas quando ele está dentro do .perfil-container[m
+[31m-  para ficar igual à imagem (sem bordas arredondadas em cima)[m
+[31m-*/[m
+[31m-.perfil-edit-button.custom-button {[m
+[31m-  margin-top: 0;[m
+[31m-  width: 100%;[m
+[31m-  border-radius: 0 0 8px 8px; /* Cantos de baixo arredondados */[m
+[31m-  height: 55px; /* Um pouco mais alto */[m
+[31m-  font-size: 1rem;[m
+[31m-}[m
+[31m-[m
+[31m-.logout-button {[m
+[31m-  width: 100%;[m
+[31m-  background-color: transparent;[m
+[31m-  border: 1px solid #e0e0e0;[m
+[31m-  color: var(--text-gray);[m
+[31m-  padding: 15px;[m
+[31m-  margin-top: 20px;[m
+[31m-  border-radius: 8px;[m
+[31m-  font-size: 0.95rem;[m
+[31m-  font-weight: 600;[m
+[31m-  cursor: pointer;[m
+[31m-  text-align: center;[m
+[31m-  transition: background-color 0.2s, color 0.2s;[m
+[31m-}[m
+[31m-[m
+[31m-.logout-button:hover {[m
+[31m-  background-color: #f9f9f9;[m
+[31m-  border-color: #d0d0d0;[m
+[31m-  color: var(--text-dark);[m
+[31m-}[m
+\ No newline at end of file[m
+[1mdiff --git a/src/pages/Register/index.jsx b/src/pages/Register/index.jsx[m
+[1mnew file mode 100644[m
+[1mindex 0000000..dcfcf7d[m
+[1m--- /dev/null[m
+[1m+++ b/src/pages/Register/index.jsx[m
+[36m@@ -0,0 +1,22 @@[m
+[32m+[m[32mimport './style.css'[m
+[32m+[m[32mimport Button from '../../components/Button' //importa corretamente components[m
+[32m+[m[32mimport Input from '../../components/Input'[m
+[32m+[m[32mimport Card from '../../components/Card'[m
+[32m+[m[32mimport Form from '../../components/Form'[m
+[32m+[m
+[32m+[m[32mfunction Register() {    //componente React sempre função com letra M. como uma classe[m
+[32m+[m
+[32m+[m[32m  //acima de return vai o JS bruto[m
+[32m+[m[32m  return (      //vai ter um return que sempre vai ser html; p colocar js se usa {}[m[41m [m
+[32m+[m[32m    <Card title="Faça seu cadastro">[m
+[32m+[m[32m      <Form>[m
+[32m+[m[32m        <Input placeholder='Nome' name='nome' type='text' />[m
+[32m+[m[32m        <Input placeholder='Email' name='email' type='email' />[m
+[32m+[m[32m        <Input placeholder='Senha' name='pass' type='password' />[m
+[32m+[m[32m      </Form>[m
+[32m+[m[32m      <Button text='Cadastrar' type='submit' />   {/*precisa de submit só p submeter o form.*/}[m
+[32m+[m[32m    </Card>[m
+[32m+[m[32m  )[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mexport default Register[m
+[1mdiff --git a/src/pages/Register/style.css b/src/pages/Register/style.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3fd5533[m
+[1m--- /dev/null[m
+[1m+++ b/src/pages/Register/style.css[m
+[36m@@ -0,0 +1,6 @@[m
+[32m+[m[32m#root {[m
+[32m+[m[32m  max-width: 1280px;[m
+[32m+[m[32m  margin: 0 auto;[m
+[32m+[m[32m  padding: 2rem; /*TESTAR RETIRADA*/[m
+[32m+[m[32m  text-align: center;[m
+[32m+[m[32m}[m
