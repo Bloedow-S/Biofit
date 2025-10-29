@@ -1,11 +1,17 @@
-import './style.css'
+import './style.css'; 
+import PropTypes from "prop-types";
 
-function Button({text, type = 'buton'}) {    //componente React sempre função com letra M. como uma classe
-
-  //acima de return vai o JS bruto
-  return (      //vai ter um return que sempre vai ser html; p colocar js se usa {} 
-    <button className='button' type={type}>{text}</button>
-  )
+function Botao({ type = "button", children, ...rest }) {
+  return (
+    <button className="custom-button" type={type} {...rest}>
+      {children}
+    </button>
+  );
 }
 
-export default Button
+Botao.propTypes = {
+  type: PropTypes.string,
+  children: PropTypes.node,
+};
+
+export default Botao;
