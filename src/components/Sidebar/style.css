@@ -1,6 +1,7 @@
+/* src/components/Sidebar/style.css */
 .sidebar-container {
   width: 260px;
-  height: 100vh; /* Ocupa 100% da altura da janela */
+  height: 100vh;
   background-color: #ffffff;
   border-right: 1px solid #f0f0f0;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
@@ -8,28 +9,37 @@
   flex-direction: column;
   padding: 20px;
   box-sizing: border-box;
-  /* Adiciona isso para garantir que a sidebar fique fixa e não role */
   position: sticky;
   top: 0;
 }
 
-
+/* 1. RENOMEIE ESTA CLASSE */
+.logo-container {
+  padding: 10px;
+  margin-bottom: 30px; /* 2. CORRIJA PARA 'px' */
+  text-align: center;
+}
 
 .logo-img {
-  max-width: 100%; /* Garante que a imagem não saia do container */
+  width: 130px; /* Você definiu 130px aqui, ok */
+  max-width: 100%;
   height: auto;
-  margin-bottom: 0px;
-  
+  object-fit: contain;
+  display: inline-block;
 }
 
 .sidebar-nav ul {
-  list-style: none; /* Remove bolinhas */
+  list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px; /* Espaço entre os links */
+  gap: 10px;
+  /* 3. REMOVA ou comente esta linha: */
+  /* margin-top: -60px; */
 }
+
+/* ... (O resto do CSS continua igual) ... */
 
 .sidebar-nav li {
   margin: 0;
@@ -42,7 +52,7 @@
   border-radius: 8px;
   text-decoration: none;
   font-weight: 500;
-  color: #5d7783; /* Cor do link (cinza-azulado) */
+  color: #5d7783;
   transition: background-color 0.2s, color 0.2s;
 }
 
@@ -50,21 +60,17 @@
   width: 22px;
   height: 22px;
   margin-right: 15px;
-  /* Como os ícones são PNG pretos, não podemos mudar a cor.
-     Se fossem SVGs, poderíamos! */
 }
 
 .nav-link:hover {
-  background-color: #f5f5f5; /* Fundo cinza claro no hover */
+  background-color: #f5f5f5;
 }
 
-/* ESTILO DO LINK ATIVO */
 .nav-link.active {
-  background-color: var(--background-button, #63b995); /* Verde do botão */
-  color: var(--text-light, #ffffff); /* Texto branco */
+  background-color: var(--background-button, #63b995);
+  color: var(--text-light, #ffffff);
 }
 
-/* Tenta deixar o ícone PNG branco quando o link está ativo (filtro CSS) */
 .nav-link.active img {
   filter: brightness(0) invert(1);
 }
