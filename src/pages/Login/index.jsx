@@ -1,8 +1,8 @@
 // Importar os novos componentes
 import Input from "../../components/Input";
 import Botao from "../../components/Botao";
-import Card from "../../components/Card"; // Se você criar o Card
-import "./style.css"; // Pode manter estilos específicos da página aqui
+import Card from "../../components/Card"; 
+import "./style.css"; 
 
 function Login() {
   return (
