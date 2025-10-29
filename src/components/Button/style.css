@@ -1,0 +1,15 @@
+/*onde estão agrupados os inputs e botões*/
+.button {
+  background-color: #63b995;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 30px;
+  height: 40px;
+  font-size: 14px;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+  

@@ -1,33 +1,21 @@
 // Importar os novos componentes
 import Input from "../../components/Input";
-import Botao from "../../components/Botao";
+import Button from '../../components/Button'
 import Card from "../../components/Card"; 
+import Form from '../../components/Form'
 import "./style.css"; 
 
 function Login() {
   return (
-    <div className="container">
-      {" "}
-      {/* Pode ser que precise ajustar este container */}
-      {/* Usar o Card para envolver o formulário */}
-      <Card>
-        {/* Usar <form> se fizer sentido semântico, ou só a div do Card */}
-        <form /* onSubmit={suaFuncaoDeSubmit} */>
-          <h1>Faça seu cadastro {/* Ou Login, dependendo da tela */}</h1>
-          {/* Usar os componentes Input e Botao */}
-          <Input placeholder="Nome" name="nome" type="text" />
-          <Input placeholder="Email" name="email" type="email" />
-          <Input placeholder="Senha" name="pass" type="password" />
-
-          <Botao type="submit">
-            {" "}
-            {/* Mudar type para submit se for um form */}
-            Cadastrar {/* Ou Entrar */}
-          </Botao>
-        </form>
-      </Card>
-    </div>
-  );
+    <Card>
+      <h1>Acessar conta</h1>
+      <Form>
+        <Input placeholder='Email' name='email' type='email' />
+        <Input placeholder='Senha' name='pass' type='password' />
+        <Button text='Entrar' type='submit'></Button>
+      </Form>
+    </Card>
+  )
 }
 
 export default Login;
