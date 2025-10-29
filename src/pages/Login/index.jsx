@@ -7,7 +7,8 @@ import "./style.css";
 
 function Login() {
   return (
-    <Card title='Acessar conta'>
+    <Card>
+      <h1>Acessar conta</h1>
       <Form>
         <Input placeholder='Email' name='email' type='email' />
         <Input placeholder='Senha' name='pass' type='password' />

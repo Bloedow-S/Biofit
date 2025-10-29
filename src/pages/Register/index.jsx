@@ -6,8 +6,9 @@ import Form from '../../components/Form'
 
 function Register() {
   return ( 
-    <Card title="Faça seu cadastro">
+    <Card>
       <Form>
+        <h1>Faça seu cadastro</h1>
         <Input placeholder='Nome' name='nome' type='text' />
         <Input placeholder='Email' name='email' type='email' />
         <Input placeholder='Senha' name='pass' type='password' />
