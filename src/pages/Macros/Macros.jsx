@@ -1,7 +1,7 @@
-export default function Calculos() {
+export default function Macros() {
   return (
     <div>
-      <h1>Página de calculo</h1>
+      <h1>Página de Macros</h1>
       <p>Esta página está em construção.</p>
     </div>
   );

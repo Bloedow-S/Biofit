@@ -1,0 +1,160 @@
+/* src/pages/Perfil/style.css */
+
+/* Cor de fundo verde-claro dos cards de stat (da imagem) */
+:root {
+  --light-green-bg: #f0fbf5;
+  --light-green-border: #d6f2e4;
+  --text-gray: #5d7783;
+}
+
+.perfil-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.perfil-greeting {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 25px;
+}
+
+/* --- Stats Cards (IMC e Peso) --- */
+.stat-cards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background-color: var(--light-green-bg);
+  border: 1px solid var(--light-green-border);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.stat-card img {
+  width: 24px;
+  height: 24px;
+  /* Cor dos ícones da imagem é verde, o nosso é preto.
+     Podemos usar filtro para aproximar, mas idealmente seriam SVGs */
+  filter: invert(55%) sepia(43%) saturate(541%) hue-rotate(101deg)
+    brightness(93%) contrast(88%);
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-gray);
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  color: var(--text-dark);
+  font-weight: 700;
+}
+
+/* --- Info Card (Minhas Informações) --- */
+.info-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Para o botão no rodapé se ajustar */
+}
+
+.info-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-header img {
+  width: 22px;
+  height: 22px;
+  filter: invert(44%) sepia(18%) saturate(601%) hue-rotate(156deg)
+    brightness(91%) contrast(88%);
+}
+
+.info-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-gray);
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+}
+
+.info-list .info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  color: var(--text-gray);
+  font-weight: 500;
+}
+
+.info-value {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+/* --- Botões --- */
+
+/*
+  Sobrescrevemos o estilo do componente .custom-button
+  apenas quando ele está dentro do .perfil-container
+  para ficar igual à imagem (sem bordas arredondadas em cima)
+*/
+.perfil-edit-button.custom-button {
+  margin-top: 0;
+  width: 100%;
+  border-radius: 0 0 8px 8px; /* Cantos de baixo arredondados */
+  height: 55px; /* Um pouco mais alto */
+  font-size: 1rem;
+}
+
+.logout-button {
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid #e0e0e0;
+  color: var(--text-gray);
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: #f9f9f9;
+  border-color: #d0d0d0;
+  color: var(--text-dark);
+}
