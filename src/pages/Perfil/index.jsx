@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from 'prop-types';
-import Botao from "../../components/Botao";
+import Button from "../../components/Button";
 import "./style.css";
 
 import iconBmi from "../../assets/fogo.png";
@@ -83,15 +83,15 @@ export default function Perfil() {
           <InfoItem label="Objetivo" value={userData.objetivo} />
         </div>
 
-        {/* Usamos o componente Botao, mas aplicamos um estilo para
+        {/* Usamos o componente Button, mas aplicamos um estilo para
             encaixar no rodapé do card */}
-<Botao
+<Button
           type="button"
           onClick={handleEdit}
           className="perfil-edit-button"
         >
           Editar Dados
-        </Botao>
+        </Button>
      
       </div>
 
