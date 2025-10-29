@@ -1,5 +1,70 @@
-.sidebar{
-    width: 250px;
-    background-color: #f4f4f4;
-    padding: 15px;
+.sidebar-container {
+  width: 260px;
+  height: 100vh; /* Ocupa 100% da altura da janela */
+  background-color: #ffffff;
+  border-right: 1px solid #f0f0f0;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  /* Adiciona isso para garantir que a sidebar fique fixa e não role */
+  position: sticky;
+  top: 0;
+}
+
+
+
+.logo-img {
+  max-width: 100%; /* Garante que a imagem não saia do container */
+  height: auto;
+  margin-bottom: 0px;
+  
+}
+
+.sidebar-nav ul {
+  list-style: none; /* Remove bolinhas */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Espaço entre os links */
+}
+
+.sidebar-nav li {
+  margin: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  color: #5d7783; /* Cor do link (cinza-azulado) */
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.nav-link img {
+  width: 22px;
+  height: 22px;
+  margin-right: 15px;
+  /* Como os ícones são PNG pretos, não podemos mudar a cor.
+     Se fossem SVGs, poderíamos! */
+}
+
+.nav-link:hover {
+  background-color: #f5f5f5; /* Fundo cinza claro no hover */
+}
+
+/* ESTILO DO LINK ATIVO */
+.nav-link.active {
+  background-color: var(--background-button, #63b995); /* Verde do botão */
+  color: var(--text-light, #ffffff); /* Texto branco */
+}
+
+/* Tenta deixar o ícone PNG branco quando o link está ativo (filtro CSS) */
+.nav-link.active img {
+  filter: brightness(0) invert(1);
 }
