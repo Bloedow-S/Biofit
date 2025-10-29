@@ -1,0 +1,6 @@
+.form { /*onde estão agrupados os inputs e botões*/
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;    /*espaço entre inputs*/
+}
