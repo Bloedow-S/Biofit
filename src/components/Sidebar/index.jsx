@@ -6,18 +6,18 @@ import iconPerfil from "../../assets/do-utilizador.png";
 import iconCalculos from "../../assets/calculadora.png";
 import iconMacros from "../../assets/fatia-de-bolo.png"; 
 import iconHistorico from "../../assets/historia.png";
+import Logo from "../Logo";
 // Faltando o ícone do Logo, vou usar texto por enquanto
 
 export default function Sidebar() {
 
   return (
 <aside className="sidebar-container">
-  <div className="logo-container"> {/* <- AQUI */}
-    <img className="logo-img" src="/src/assets/Logo2.png" alt="Logo" />
-  </div>
+  
 
   <nav className="sidebar-nav">
     <ul>
+      <Logo></Logo>
       <li>
         <NavLink
           to="/perfil"

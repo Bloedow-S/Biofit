@@ -5,7 +5,7 @@
   border-radius: 10px;
   width: 450px; /* Largura fixa como na imagem */
   max-width: 90%; /* Evita que fique muito largo em telas pequenas */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra suave */
+  box-shadow: 0 4px 12px rgba(66, 64, 64, 0.15); /* Sombra suave */
   box-sizing: border-box;
 
   /* Para organizar os itens internos (título, inputs, botão) */
@@ -17,7 +17,7 @@
 
 /* Estilo específico para o H1 dentro do Card */
 .custom-card h1 {
-  color: var(--text-light); /* Texto branco */
+  color: var(--text-medium);
   font-size: 1.5em; /* Tamanho do título */
   font-weight: 600; /* Peso da fonte */
   margin-bottom: 10px; /* Espaço extra abaixo do título */

@@ -13,21 +13,6 @@
   top: 0;
 }
 
-/* 1. RENOMEIE ESTA CLASSE */
-.logo-container {
-  padding: 10px;
-  margin-bottom: 30px; /* 2. CORRIJA PARA 'px' */
-  text-align: center;
-}
-
-.logo-img {
-  width: 130px; /* Você definiu 130px aqui, ok */
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  display: inline-block;
-}
-
 .sidebar-nav ul {
   list-style: none;
   padding: 0;
