@@ -1,0 +1,14 @@
+/* 1. RENOMEIE ESTA CLASSE */
+.logo-container {
+  padding: 10px;
+  margin-bottom: 5px; /* 2. CORRIJA PARA 'px' */
+  text-align: center;
+}
+
+.logo-img {
+  width: 130px; /* Você definiu 130px aqui, ok */
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: inline-block;
+}

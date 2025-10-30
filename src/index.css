@@ -4,11 +4,12 @@
   color: #0C0F0A; /* Cor de texto padrão (escura) */
 
   /* Cores - úteis para referência */
-  --background-page: #EBF4FE; /* Azul claro do fundo */
-  --background-card: #5d7783; /* Cinza-azulado do card */
-  --background-input: #ffffff; /* Branco dos inputs */
+  --background-page: #f9f9f9; /* Azul claro do fundo */
+  --background-card: #ffffff; /* Cinza-azulado do card */
+  --background-input: #dddddd; /* Branco dos inputs */
   --background-button: #63b995; /* Verde do botão */
   --text-light: #ffffff; /* Texto branco */
+  --text-medium: #6e6e6e;
   --text-dark: #0C0F0A; /* Texto escuro */
   --text-placeholder: #888; /* Cinza para placeholder */
 }
