@@ -9,9 +9,14 @@ import DashboardLayout from './components/layouts/DashboardLayout';
 // 1. CORRIJA OS CAMINHOS DOS IMPORTS
 import Login from './pages/Login/index'; // Aponta para Login.jsx dentro da pasta Login
 import Register from './pages/Register/index';
-import CriarConta from './pages/CriarConta/CriarConta'; 
-import Perfil from './pages/Perfil/index';      
-import Calculos from './pages/Calculos/Calculos';    
+
+// --- LINHA FALTANDO ---
+// Precisamos importar a página de onboarding
+import CriarConta from './pages/CriarConta/index.jsx'; 
+// --------------------
+
+import Perfil from './pages/Perfil/index';       
+import Calculos from './pages/Calculos/Calculos';     
 import Macros from './pages/Macros/Macros';       
 
 createRoot(document.getElementById('root')).render(
@@ -22,8 +27,13 @@ createRoot(document.getElementById('root')).render(
         {/* (Mais tarde, podemos envolvê-las no AuthLayout) */}
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register/>} />
+        
         {/* 2. ADICIONE A ROTA PARA CRIAR CONTA AQUI FORA */}
-        <Route path="/criar-conta" element={<CriarConta />} />
+        {/* --- ROTA FALTANDO --- */}
+        {/* Esta é a rota do "modal" de onboarding pós-login */}
+        <Route path="/CriarConta" element={<CriarConta />} />
+        {/* -------------------- */}
+
 
         {/* --- Rotas Privadas (COM Sidebar) --- */}
         <Route element={<DashboardLayout />}>
