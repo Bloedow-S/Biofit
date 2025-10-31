@@ -1,0 +1,26 @@
+.custom-select {
+  background-color: var(--background-input); 
+  color: var(--text-dark); 
+  border: none;
+  border-radius: 30px; 
+  height: 50px;
+  font-size: 1rem;
+  padding: 0 20px;
+  outline: none;
+  width: 100%; 
+  box-sizing: border-box;
+  
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+
+  background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+}
+
+.custom-select:focus {
+  box-shadow: 0 0 0 2px rgba(99, 185, 149, 0.5);
+}
