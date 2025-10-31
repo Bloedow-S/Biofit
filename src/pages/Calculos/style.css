@@ -1,0 +1,67 @@
+/* src/pages/Calculos/style.css */
+
+.calculos-container {
+  width: 100%;
+}
+
+.calculos-container h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 25px;
+}
+
+/* Container para os cards de resultado */
+.resultados-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+/* Estilo de cada card de resultado */
+.resultado-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  box-sizing: border-box;
+}
+
+.resultado-card h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #5d7783; /* var(--text-gray) */
+  margin-top: 0;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 15px;
+}
+
+/* O número grande (resultado) */
+.resultado-valor {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--background-button); /* Verde principal */
+  margin-bottom: 10px;
+}
+
+.resultado-valor span {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #5d7783;
+  margin-left: 5px;
+}
+
+/* Texto de descrição/explicação */
+.resultado-descricao {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+  line-height: 1.5;
+}
+
+.resultado-aviso {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 15px;
+  font-style: italic;
+}
