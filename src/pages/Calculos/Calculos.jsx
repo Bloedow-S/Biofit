@@ -21,6 +21,7 @@ export default function Calculos() {
       return;
     }
     setUserData(usuarioSalvo);
+    localStorage.setItem('usuarioDados', JSON.stringify(usuarioSalvo));
   }, [navigate]);
 
   useEffect(() => {
@@ -44,17 +45,74 @@ export default function Calculos() {
         caloriasObjCalc += 500; 
       }
 
-    
       const creatinaCalc = Math.min(peso * 0.03, 10);
 
-      setResultados({
+      const novosResultados = {
         imc: imcCalc.toFixed(1),
         tmb: tmbCalc.toFixed(0),
         caloriasObjetivo: caloriasObjCalc.toFixed(0),
         creatina: creatinaCalc.toFixed(1),
-      });
+      };
+      
+      const macros = calcularMacros(caloriasObjCalc, objetivo);
+      setResultados(novosResultados);
+      localStorage.setItem('resultados', JSON.stringify(novosResultados));
+      
+      // Salve o plano alimentar original
+      const planoOriginal = {
+        calorias: caloriasObjCalc.toFixed(0),
+        macros: macros,
+        tipo: "original",
+        objetivo: objetivo,
+        peso: peso,
+        altura: altura,
+        idade: idade,
+        sexo: sexo,
+        geradoEm: new Date().toISOString()
+      };
+
+      // Pega histórico anterior
+      const historico = JSON.parse(localStorage.getItem('historicoPlanos')) || [];
+      historico.push(planoOriginal);
+
+      localStorage.setItem('planoAlimentarAtual', JSON.stringify(planoOriginal));
+      localStorage.setItem('historicoPlanos', JSON.stringify(historico));
+
     }
+    
   }, [userData]); 
+
+  // Função para calcular macronutrientes
+  const calcularMacros = (calorias, objetivo) => {
+    let pctProteina, pctCarboidrato, pctGordura;
+
+    if (objetivo === 'Ganhar Massa') {
+      pctProteina = 0.30;
+      pctCarboidrato = 0.45;
+      pctGordura = 0.25;
+    } else if (objetivo === 'Perder Peso') {
+      pctProteina = 0.35;
+      pctCarboidrato = 0.40;
+      pctGordura = 0.25;
+    } else {
+      pctProteina = 0.28;
+      pctCarboidrato = 0.47;
+      pctGordura = 0.25;
+    }
+
+    const proteina = (calorias * pctProteina) / 4;
+    const carboidrato = (calorias * pctCarboidrato) / 4;
+    const gordura = (calorias * pctGordura) / 9;
+
+    return {
+      proteina: proteina.toFixed(0),
+      carboidrato: carboidrato.toFixed(0),
+      gordura: gordura.toFixed(1),
+      pctProteina: (pctProteina * 100).toFixed(0),
+      pctCarboidrato: (pctCarboidrato * 100).toFixed(0),
+      pctGordura: (pctGordura * 100).toFixed(0)
+    };
+  };
 
   if (!userData) {
     return <div>Carregando cálculos...</div>;

@@ -35,8 +35,8 @@ function Register() {
 
     localStorage.setItem('usuario', JSON.stringify(novoUsuario));
 
-    alert('Cadastro realizado com sucesso! Você será redirecionado para o login.');
-    navigate('/'); 
+    alert('Cadastro realizado com sucesso! Você será redirecionado para completar seu perfil');
+    navigate('/CriarConta'); 
   };
 
   return ( 
