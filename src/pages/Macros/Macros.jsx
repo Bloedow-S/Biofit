@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"; 
-import Card from "../../components/Card";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Select from "../../components/Select";
@@ -152,7 +151,7 @@ export default function Macros() {
             </div>
             <div className="total-recomendado">
               <span>Total Recomendado</span>
-              <p>2000 <span>kcal</span></p>
+              <p>{resultados.caloriasObjetivo}<span>kcal</span></p>
             </div>
 
             <div className="progress-bar">
