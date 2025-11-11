@@ -7,14 +7,11 @@ import iconCalculos from "../../assets/calculadora.png";
 import iconMacros from "../../assets/fatia-de-bolo.png"; 
 import iconHistorico from "../../assets/historia.png";
 import Logo from "../Logo";
-// Faltando o ícone do Logo, vou usar texto por enquanto
 
 export default function Sidebar() {
 
   return (
 <aside className="sidebar-container">
-  
-
   <nav className="sidebar-nav">
     <ul>
       <Logo></Logo>
@@ -56,7 +53,7 @@ export default function Sidebar() {
 
       <li>
         <NavLink
-          to="/historico"
+          to="/history"
           className={({ isActive }) =>
             isActive ? "nav-link active" : "nav-link"
           }
