@@ -1,67 +1,84 @@
-import { useState } from 'react';
-import Input from "../../components/Input";
-import Button from '../../components/Button';
-import Card from "../../components/Card"; 
-import Form from '../../components/Form';
-import "./style.css"; 
-import Logo from "../../components/Logo";
-import { useNavigate, Link } from 'react-router-dom';
-
+import { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
+import './style.css'
+import Button from '../../components/Button'
+import Input from '../../components/Input'
+import Card from '../../components/Card'
+import Form from '../../components/Form'
+import Logo from '../../components/Logo' // Importação do Logo
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  
+  const [email, setEmail] = useState('')
+  const [senha, setSenha] = useState('')
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    const usuarioSalvo = JSON.parse(localStorage.getItem('usuario'));
+  const handleLogin = async (e) => {
+    e.preventDefault()
 
-    if (!usuarioSalvo) {
-      alert('Nenhum usuário cadastrado. Por favor, crie uma conta.');
-      navigate('/register');
-      return;
+    // 1. Limpa os valores de email e senha para remover espaços acidentais
+    const cleanedEmail = email.trim();
+    const cleanedSenha = senha.trim();
+
+    if (!cleanedEmail || !cleanedSenha) {
+      alert('Preencha todos os campos!')
+      return
     }
 
-    if (email === usuarioSalvo.email && senha === usuarioSalvo.senha) {
+    try {
+      // 2. Busca no json-server o usuário que corresponde EXATAMENTE ao email e senha (pass)
+      const url = `http://localhost:3000/users?email=${encodeURIComponent(cleanedEmail)}&pass=${encodeURIComponent(cleanedSenha)}`;
       
-      if (!usuarioSalvo.perfilCompleto) {
-        alert(`Bem-vindo! Por favor, complete seu perfil para continuar.`);
-        navigate('/CriarConta');
+      const response = await fetch(url)
+      const users = await response.json()
+
+      if (users.length > 0) {
+        const usuarioLogado = users[0] 
+        
+        // 3. Sucesso: Salva o ID do usuário (crucial para o resto da aplicação)
+        localStorage.setItem('user_id', usuarioLogado.id);
+        localStorage.setItem('usuario', JSON.stringify(usuarioLogado)) // Salva o objeto completo
+
+        alert(`Bem-vindo de volta, ${usuarioLogado.email}!`)
+        
+        // 4. Redireciona para o Perfil (página privada)
+        navigate('/perfil') 
       } else {
-        navigate('/perfil');
+        alert('E-mail ou senha incorretos.')
       }
 
-    } else {
-      alert('E-mail ou senha incorretos!');
+    } catch (error) {
+      console.error('Erro de conexão:', error)
+      alert('Erro ao conectar com o servidor. Verifique se o json-server está rodando.')
     }
-  };
+  }
 
   return (
-    <Card>
-      <Logo></Logo>
-      <h1>Acessar conta</h1>
+    <Card> {/* Removemos o title do Card, já que o Login geralmente tem o Logo */}
+      <Logo />
       <Form onSubmit={handleLogin}>
+        <h1>Acessar conta</h1> {/* Adicionamos o H1 de volta aqui */}
         <Input 
           placeholder='Email' 
           name='email' 
           type='email' 
           value={email}
-          onChange={(e) => setEmail(e.target.value)} 
-          required 
+          onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <Input 
           placeholder='Senha' 
           name='pass' 
           type='password' 
           value={senha}
-          onChange={(e) => setSenha(e.target.value)} 
-          required 
+          onChange={(e) => setSenha(e.target.value)}
+          required
         />
-        <Button type='submit'>Entrar</Button>
+        
+        <Button text='Entrar' type='submit' />
       </Form>
       <p className="toggle-link">
-        Não possui conta? <Link to="/register">Cadastre-se</Link>
+        Não tem conta? <Link to="/register">Crie uma aqui</Link>
       </p>
     </Card>
   )

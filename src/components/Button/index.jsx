@@ -1,17 +1,19 @@
 import './style.css'; 
 import PropTypes from "prop-types";
 
-function Botao({ type = "button", children, ...rest }) {
+// mudei o nome pra button msm
+function Button({ text, type = "button" }) {
   return (
-    <button className="custom-button" type={type} {...rest}>
-      {children}
+    // Mudamos a classe para button
+    <button className="button" type={type}>
+      {text}
     </button>
   );
 }
 
-Botao.propTypes = {
+Button.propTypes = {
   type: PropTypes.string,
-  children: PropTypes.node,
+  text: PropTypes.string.isRequired, // validando text inves de children
 };
 
-export default Botao;
+export default Button;

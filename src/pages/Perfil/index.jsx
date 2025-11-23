@@ -69,6 +69,7 @@ export default function Perfil() {
 
   const handleLogout = () => {
     localStorage.removeItem('usuario');
+    localStorage.removeItem('user_id'); // Adicionado para limpeza completa
     alert("Você foi desconectado.");
     navigate('/'); 
   };

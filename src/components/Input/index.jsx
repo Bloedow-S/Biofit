@@ -16,7 +16,9 @@ function Input({ type = 'text', placeholder, name, ...rest }) {
 Input.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
-  name: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 export default Input;

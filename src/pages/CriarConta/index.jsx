@@ -28,7 +28,7 @@ export default function CriarConta() {
     }
   }, [navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!sexo || !objetivo) {
@@ -58,9 +58,27 @@ export default function CriarConta() {
       perfilCompleto: true
     };
 
-    localStorage.setItem('usuario', JSON.stringify(usuarioAtualizado));
-    alert('Perfil completo! Bem-vindo ao BioFit!');
-    navigate('/perfil');
+    try {
+      const response = await fetch(`http://localhost:3000/users/${usuarioAtual.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(usuarioAtualizado),
+      });
+
+      if (response.ok) {
+        const updatedUser = await response.json();
+        localStorage.setItem('usuario', JSON.stringify(updatedUser));
+        alert('Perfil completo! Bem-vindo ao BioFit!');
+        navigate('/perfil');
+      } else {
+        alert('Erro ao salvar as informações do perfil.');
+      }
+    } catch (error) {
+      console.error('Erro ao atualizar perfil:', error);
+      alert('Ocorreu um erro ao atualizar seu perfil. Verifique sua conexão.');
+    }
   };
 
   return (

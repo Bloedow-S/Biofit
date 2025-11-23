@@ -1,0 +1,29 @@
+{
+  "users": [
+    {
+      "email": "teste2@gmail.com",
+      "pass": "123",
+      "perfilCompleto": true,
+      "id": 1,
+      "nome": "teste da silva",
+      "sexo": "Feminino",
+      "idade": 3,
+      "peso": 90,
+      "altura": 150,
+      "objetivo": "Perder Peso"
+    },
+    {
+      "email": "teste3@gmail.com",
+      "pass": "321",
+      "perfilCompleto": true,
+      "id": 2,
+      "nome": "teste pereira",
+      "sexo": "Masculino",
+      "idade": 40,
+      "peso": 70,
+      "altura": 175,
+      "objetivo": "Ganhar Massa"
+    }
+  ],
+  "history": []
+}

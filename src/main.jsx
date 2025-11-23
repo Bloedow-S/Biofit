@@ -18,16 +18,16 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />  {/*Rotas Públicas (sem Sidebar)*/}
+        <Route path="/" element={<Login />} />  {/*rota publica (sem Sidebar)*/}
         <Route path="/register" element={<Register/>} />
         <Route path="/CriarConta" element={<CriarConta />} />
-        <Route element={<DashboardLayout />}>  {/*Rotas Privadas (COM Sidebar)*/}
+        <Route element={<DashboardLayout />}>  {/*rota privada (COM Sidebar)*/}
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/calculos" element={<Calculos />} />
           <Route path="/macros" element={<Macros />} />
           <Route path="/history" element={<History />} />
         </Route>
-        <Route path="*" element={<div>Erro 404: Página não encontrada!</div>} />  {/*Rota para página não encontrada */}
+        <Route path="*" element={<div>Erro 404: Página não encontrada!</div>} />  {/*rota para pagina não encontrada */}
       </Routes>
     </BrowserRouter>
   </StrictMode>
