@@ -34,7 +34,8 @@
       "idade": 70,
       "peso": 90,
       "altura": 180,
-      "objetivo": "Perder Peso"
+      "objetivo": "Ganhar Massa",
+      "imc": "27.8"
     }
   ],
   "history": [
@@ -67,6 +68,79 @@
       "resultadoCalorias": "1180",
       "resultadoImc": "27.8",
       "id": 3
+    },
+    {
+      "userId": 3,
+      "date": "25/11/2025",
+      "timestamp": "2025-11-25T13:13:40.559Z",
+      "peso": 90,
+      "objetivo": "Perder Peso",
+      "resultadoCalorias": "1180",
+      "resultadoImc": "27.8",
+      "id": 4
+    },
+    {
+      "userId": 3,
+      "date": "25/11/2025",
+      "timestamp": "2025-11-25T13:21:33.142Z",
+      "peso": 70,
+      "objetivo": "Ganhar Massa",
+      "resultadoCalorias": "1180",
+      "resultadoImc": "27.8",
+      "tipo": "customizado",
+      "id": 5
+    },
+    {
+      "userId": 3,
+      "date": "25/11/2025",
+      "timestamp": "2025-11-25T13:21:36.835Z",
+      "peso": 70,
+      "objetivo": "Ganhar Massa",
+      "resultadoCalorias": "1180",
+      "resultadoImc": "27.8",
+      "tipo": "customizado",
+      "id": 6
+    },
+    {
+      "userId": 3,
+      "date": "25/11/2025",
+      "timestamp": "2025-11-25T13:21:39.596Z",
+      "peso": 90,
+      "objetivo": "Ganhar Massa",
+      "resultadoCalorias": "2180",
+      "resultadoImc": "27.8",
+      "id": 7
+    },
+    {
+      "userId": 3,
+      "date": "25/11/2025",
+      "timestamp": "2025-11-25T13:22:52.151Z",
+      "peso": 90,
+      "objetivo": "Ganhar Massa",
+      "resultadoCalorias": "2180",
+      "resultadoImc": "27.8",
+      "id": 8
+    },
+    {
+      "userId": 3,
+      "date": "25/11/2025",
+      "timestamp": "2025-11-25T13:23:45.811Z",
+      "peso": 90,
+      "objetivo": "Ganhar Massa",
+      "resultadoCalorias": "2180",
+      "resultadoImc": "27.8",
+      "id": 9
+    },
+    {
+      "userId": 3,
+      "date": "25/11/2025",
+      "timestamp": "2025-11-25T13:28:41.378Z",
+      "peso": 70,
+      "objetivo": "Ganhar Massa",
+      "resultadoCalorias": "2180",
+      "resultadoImc": "27.8",
+      "tipo": "customizado",
+      "id": 10
     }
   ]
 }

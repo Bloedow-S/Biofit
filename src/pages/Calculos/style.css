@@ -65,3 +65,37 @@
   margin-top: 15px;
   font-style: italic;
 }
+/* src/components/Button/style.css */
+
+/* A classe agora deve ser .button para bater com o index.jsx */
+.button {
+  background-color: #63b995; /* Verde do BioFit */
+  color: #ffffff;            /* Texto branco */
+  border: none;
+  border-radius: 30px;       /* Bordas bem arredondadas */
+  height: 50px;              /* Altura padrão */
+  font-size: 1rem;           /* Tamanho da fonte */
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;               /* Ocupa 100% do container pai */
+  padding: 0 20px;
+  box-sizing: border-box;
+  transition: opacity 0.2s ease-in-out;
+  
+  /* Centraliza o texto verticalmente e horizontalmente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.button:hover {
+  opacity: 0.85; /* Efeito ao passar o mouse */
+}
+
+/* Estilo para quando o botão estiver desativado (ex: "Salvando...") */
+.button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}

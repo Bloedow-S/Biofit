@@ -1,19 +1,21 @@
 import './style.css'; 
 import PropTypes from "prop-types";
 
-// mudei o nome pra button msm
-function Button({ text, type = "button" }) {
+function Button({ text, children, type = "button", className = "", ...rest }) {
   return (
-    // Mudamos a classe para button
-    <button className="button" type={type}>
-      {text}
+    // Combina a classe padrão 'button' com qualquer classe extra passada (ex: perfil-edit-button)
+    // {...rest} espalha propriedades como onClick, disabled, etc.
+    <button className={`button ${className}`} type={type} {...rest}>
+      {text || children}
     </button>
   );
 }
 
 Button.propTypes = {
   type: PropTypes.string,
-  text: PropTypes.string.isRequired, // validando text inves de children
+  text: PropTypes.string,
+  children: PropTypes.node,
+  className: PropTypes.string,
 };
 
 export default Button;

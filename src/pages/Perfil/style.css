@@ -125,19 +125,24 @@
 
 /* --- Botões --- */
 
-/*
-  Sobrescrevemos o estilo do componente .custom-button
-  apenas quando ele está dentro do .perfil-container
-  para ficar igual à imagem (sem bordas arredondadas em cima)
-*/
-.perfil-edit-button.custom-button {
-  margin-top: 0;
-  width: 100%;
-  border-radius: 0 0 8px 8px; /* Cantos de baixo arredondados */
-  height: 55px; /* Um pouco mais alto */
-  font-size: 1rem;
+.perfil-edit-button {
+   width: 100%;
+  background-color: transparent;
+  border: 1px solid #e0e0e0;
+  color: var(--text-gray);
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s, color 0.2s;
+  background-color: #63b995; /* Garante a cor verde */
+  color: white;
 }
 
+/* Estilo do botão de sair (MANTENHA IGUAL) */
 .logout-button {
   width: 100%;
   background-color: transparent;

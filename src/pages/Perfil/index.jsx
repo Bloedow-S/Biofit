@@ -119,16 +119,10 @@ export default function Perfil() {
           <InfoItem label="Altura" value={`${userData.altura} cm`} />
           <InfoItem label="Objetivo" value={userData.objetivo} />
         </div>
-
-        <Button
-          type="button"
-          onClick={handleEdit}
-          className="perfil-edit-button"
-        >
-          Editar Dados
-        </Button>
       </div>
-
+      <Button type="button" onClick={handleEdit} className="perfil-edit-button">
+        Editar Dados
+      </Button>
       <button className="logout-button" onClick={handleLogout}>
         Sair da conta
       </button>

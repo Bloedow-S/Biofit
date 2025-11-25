@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "./style.css";
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from '../../components/Button'; // Importamos o Botão
+import './style.css'; 
 
 export default function Calculos() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
-  // Estado para controlar se está salvando
-  const [saving, setSaving] = useState(false);
+  const [saving, setSaving] = useState(false); 
 
   const [resultados, setResultados] = useState({
     imc: 0,
@@ -15,13 +15,13 @@ export default function Calculos() {
     creatina: 0,
   });
 
-  // 1. Carregar dados DO SERVIDOR usando o ID salvo no login
+  // 1. Carregar dados DO SERVIDOR
   useEffect(() => {
-    const userId = localStorage.getItem("user_id");
+    const userId = localStorage.getItem('user_id');
 
     if (!userId) {
       alert("Usuário não identificado. Faça login novamente.");
-      navigate("/");
+      navigate('/');
       return;
     }
 
@@ -31,9 +31,9 @@ export default function Calculos() {
         if (response.ok) {
           const data = await response.json();
           if (!data.perfilCompleto) {
-            alert("Complete seu perfil antes de acessar os cálculos.");
-            navigate("/CriarConta");
-            return;
+             alert("Complete seu perfil antes de acessar os cálculos.");
+             navigate('/CriarConta');
+             return;
           }
           setUserData(data);
         } else {
@@ -47,26 +47,26 @@ export default function Calculos() {
     fetchUserData();
   }, [navigate]);
 
-  // 2. Realizar Cálculos e SALVAR NO DB.JSON quando userData for carregado
+  // 2. Apenas Realizar Cálculos (SEM SALVAR AUTOMATICAMENTE)
   useEffect(() => {
     if (userData) {
-      const { peso, altura, idade, sexo, objetivo, id } = userData;
+      const { peso, altura, idade, sexo, objetivo } = userData;
 
       const alturaM = altura / 100;
       const imcCalc = peso / (alturaM * alturaM);
 
       let tmbCalc = 0;
-      if (sexo === "Masculino" || sexo === "Outro") {
-        tmbCalc = 10 * peso + 6.25 * altura - 5 * idade + 5;
+      if (sexo === 'Masculino' || sexo === 'Outro') {
+        tmbCalc = (10 * peso) + (6.25 * altura) - (5 * idade) + 5;
       } else {
-        tmbCalc = 10 * peso + 6.25 * altura - 5 * idade - 161;
+        tmbCalc = (10 * peso) + (6.25 * altura) - (5 * idade) - 161;
       }
 
       let caloriasObjCalc = tmbCalc;
-      if (objetivo === "Perder Peso") {
-        caloriasObjCalc -= 500;
-      } else if (objetivo === "Ganhar Massa") {
-        caloriasObjCalc += 500;
+      if (objetivo === 'Perder Peso') {
+        caloriasObjCalc -= 500; 
+      } else if (objetivo === 'Ganhar Massa') {
+        caloriasObjCalc += 500; 
       }
 
       const creatinaCalc = Math.min(peso * 0.03, 10);
@@ -77,46 +77,41 @@ export default function Calculos() {
         caloriasObjetivo: caloriasObjCalc.toFixed(0),
         creatina: creatinaCalc.toFixed(1),
       };
-
+      
       setResultados(novosResultados);
-      // Salva no localStorage apenas para persistência de sessão rápida
-      localStorage.setItem("resultados", JSON.stringify(novosResultados));
-
-      // --- LÓGICA DE SALVAMENTO NO BACKEND ---
-      const salvarNoHistorico = async () => {
-        // Evita salvar duplicado se já estiver salvando
-        if (saving) return;
-        setSaving(true);
-
-        const novoRegistro = {
-          userId: id, // Vínculo com o usuário (Chave Estrangeira)
-          date: new Date().toLocaleDateString("pt-BR"),
-          timestamp: new Date().toISOString(),
-          peso: peso,
-          objetivo: objetivo,
-          resultadoCalorias: novosResultados.caloriasObjetivo,
-          resultadoImc: novosResultados.imc,
-        };
-
-        try {
-          await fetch("http://localhost:3000/history", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(novoRegistro),
-          });
-          console.log("Cálculo salvo no histórico do servidor!");
-        } catch (error) {
-          console.error("Erro ao salvar histórico:", error);
-        } finally {
-          setSaving(false);
-        }
-      };
-
-      // Chamamos a função de salvar
-      salvarNoHistorico();
+      localStorage.setItem('resultados', JSON.stringify(novosResultados));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userData]);
+  }, [userData]); 
+
+  // 3. Função Manual para Salvar
+  const handleSalvarHistorico = async () => {
+    if (saving || !userData) return; 
+    setSaving(true);
+
+    const novoRegistro = {
+      userId: userData.id,
+      date: new Date().toLocaleDateString('pt-BR'),
+      timestamp: new Date().toISOString(),
+      peso: userData.peso,
+      objetivo: userData.objetivo,
+      resultadoCalorias: resultados.caloriasObjetivo,
+      resultadoImc: resultados.imc
+    };
+
+    try {
+      await fetch('http://localhost:3000/history', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(novoRegistro)
+      });
+      alert("Cálculo salvo no histórico com sucesso!");
+    } catch (error) {
+      console.error("Erro ao salvar histórico:", error);
+      alert("Erro ao conectar com o servidor.");
+    } finally {
+      setSaving(false);
+    }
+  };
 
   if (!userData) {
     return <div>Carregando dados do servidor...</div>;
@@ -125,7 +120,7 @@ export default function Calculos() {
   return (
     <div className="calculos-container">
       <h1>Suas Métricas</h1>
-      {/* O restante do JSX permanece igual ao seu arquivo original */}
+      
       <div className="resultados-grid">
         <div className="resultado-card">
           <h2>Gasto Calórico Diário (TMB)</h2>
@@ -134,8 +129,7 @@ export default function Calculos() {
             <span>kcal</span>
           </div>
           <p className="resultado-descricao">
-            Sua Taxa Metabólica Basal (TMB) é a quantidade de calorias que seu
-            corpo queima em repouso total.
+            Calorias que seu corpo queima em repouso.
           </p>
         </div>
 
@@ -146,7 +140,7 @@ export default function Calculos() {
             <span>kcal</span>
           </div>
           <p className="resultado-descricao">
-            Para atingir seu objetivo de <strong>{userData.objetivo}</strong>.
+            Para atingir: <strong>{userData.objetivo}</strong>.
           </p>
         </div>
 
@@ -157,15 +151,26 @@ export default function Calculos() {
             <span>g</span>
           </div>
           <p className="resultado-descricao">
-            Dose de manutenção baseada no peso (0.03g/kg).
+            Dose de manutenção (0.03g/kg).
           </p>
         </div>
 
         <div className="resultado-card">
           <h2>Seu IMC</h2>
-          <div className="resultado-valor">{resultados.imc}</div>
-          <p className="resultado-descricao">Índice de Massa Corporal.</p>
+          <div className="resultado-valor">
+            {resultados.imc}
+          </div>
+          <p className="resultado-descricao">
+            Índice de Massa Corporal.
+          </p>
         </div>
+      </div>
+
+      {/* BOTÃO PARA SALVAR MANUALMENTE */}
+      <div style={{ marginTop: '30px', maxWidth: '300px', marginLeft: 'auto', marginRight: 'auto' }}>
+        <Button onClick={handleSalvarHistorico} disabled={saving}>
+          {saving ? 'Salvando...' : 'Salvar no Histórico'}
+        </Button>
       </div>
     </div>
   );

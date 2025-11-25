@@ -16,16 +16,29 @@ export default function CriarConta() {
   const [peso, setPeso] = useState('');
   const [altura, setAltura] = useState('');
   const [objetivo, setObjetivo] = useState('');
+  const [isEditing, setIsEditing] = useState(false); // Para mudar o texto do título
 
   useEffect(() => {
     const usuario = JSON.parse(localStorage.getItem('usuario'));
+    
     if (!usuario) {
-      alert("Você precisa estar logado para completar o perfil.");
+      // Se não tem usuário logado, volta pro login
+      alert("Você precisa estar logado.");
       navigate('/');
+      return;
     }
-    if (usuario && usuario.perfilCompleto) {
-      navigate('/perfil');
+
+    // SE O USUÁRIO JÁ TIVER DADOS (MODO EDIÇÃO), PREENCHE O FORMULÁRIO
+    if (usuario.perfilCompleto) {
+      setIsEditing(true);
+      setNome(usuario.nome || '');
+      setSexo(usuario.sexo || '');
+      setIdade(usuario.idade || '');
+      setPeso(usuario.peso || '');
+      setAltura(usuario.altura || '');
+      setObjetivo(usuario.objetivo || '');
     }
+
   }, [navigate]);
 
   const handleSubmit = async (e) => {
@@ -37,11 +50,7 @@ export default function CriarConta() {
     }
 
     const usuarioAtual = JSON.parse(localStorage.getItem('usuario'));
-    if (!usuarioAtual) {
-         alert("Erro: usuário não encontrado.");
-         navigate('/');
-         return;
-    }
+    
     if (isNaN(parseFloat(peso)) || isNaN(parseFloat(altura)) || isNaN(parseInt(idade))) {
       alert("Idade, Peso e Altura precisam ser números.");
       return;
@@ -70,7 +79,7 @@ export default function CriarConta() {
       if (response.ok) {
         const updatedUser = await response.json();
         localStorage.setItem('usuario', JSON.stringify(updatedUser));
-        alert('Perfil completo! Bem-vindo ao BioFit!');
+        alert(isEditing ? 'Dados atualizados com sucesso!' : 'Perfil completo! Bem-vindo ao BioFit!');
         navigate('/perfil');
       } else {
         alert('Erro ao salvar as informações do perfil.');
@@ -85,9 +94,9 @@ export default function CriarConta() {
     <Card>
       <Logo />
       <Form onSubmit={handleSubmit}>
-        <h1>Complete seu Perfil</h1>
+        <h1>{isEditing ? 'Editar Perfil' : 'Complete seu Perfil'}</h1>
         <p style={{color: 'white', marginTop: '-10px', marginBottom: '10px', textAlign: 'center'}}>
-          Falta só mais alguns dados para começarmos!
+          {isEditing ? 'Atualize suas informações abaixo' : 'Falta só mais alguns dados para começarmos!'}
         </p>
 
         <Input placeholder='Seu Nome' name='nome' type='text' value={nome} onChange={(e) => setNome(e.target.value)} required />
@@ -110,7 +119,7 @@ export default function CriarConta() {
           <option value="Ganhar Massa">Ganhar Massa (Superávit)</option>
         </Select>
         
-        <Button type='submit'>Salvar e Entrar</Button>
+        <Button type='submit'>{isEditing ? 'Salvar Alterações' : 'Salvar e Entrar'}</Button>
       </Form>
     </Card>
   );
