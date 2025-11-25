@@ -1,73 +1,48 @@
-import { useState, useEffect } from "react"; 
+import { useState, useEffect, useCallback } from "react"; // Import movido para o topo
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Select from "../../components/Select";
-import './style.css'
+import "./style.css";
 
 export default function Macros() {
-  {/*javascript <Button>Editar</Button>*/}
   const [edit, setEdit] = useState(false);
   const [resultados, setResultados] = useState(null);
-  const [usuario, setUsuario] = useState(null)
-  
+  const [usuario, setUsuario] = useState(null);
+
   const [macros, setMacros] = useState({
-  proteina: 0,
-  carboidrato: 0,
-  gordura: 0,
-  pctProteina: 0,
-  pctCarboidrato: 0,
-  pctGordura: 0
+    proteina: 0,
+    carboidrato: 0,
+    gordura: 0,
+    pctProteina: 0,
+    pctCarboidrato: 0,
+    pctGordura: 0,
   });
 
+  // Carregar dados ao iniciar
   useEffect(() => {
-    const dados = JSON.parse(localStorage.getItem("usuarioDados"))
-    if (dados) {
-      setUsuario(dados);
-    }
-  }, [])
+    const dados = JSON.parse(localStorage.getItem("usuarioDados"));
+    const calculos = JSON.parse(localStorage.getItem("resultados"));
 
-  useEffect(() => {
-    const calculosSalvos = JSON.parse(localStorage.getItem("resultados"));
-    if (calculosSalvos) {
-      setResultados(calculosSalvos);
-    }
-  }, [])
+    if (dados) setUsuario(dados);
+    if (calculos) setResultados(calculos);
+  }, []);
 
-  useEffect(() => {
-    if (resultados && usuario) {
-      calcularMacros();
-    }
-  }, [resultados, usuario]);
-  
-  const handleCaloriasChange = (e) => {
-    const novoValor = e.target.value;
-    setResultados({
-      ...resultados,
-      caloriasObjetivo: novoValor
-    });
-  }
+  // Função de cálculo (useCallback evita recriação desnecessária)
+  const calcularMacros = useCallback(() => {
+    if (!resultados || !usuario) return;
 
-  const handleObjetivo = (e) => {
-    const novoObjetivo = e.target.value;  
-    setUsuario({
-      ...usuario,
-      objetivo: novoObjetivo
-    });
-  }
-
-  const calcularMacros = () => {
     const calorias = parseFloat(resultados.caloriasObjetivo);
     const objetivo = usuario.objetivo;
 
     let pctProteina, pctCarboidrato, pctGordura;
 
-    if (objetivo === 'Ganhar Massa') {
-      pctProteina = 0.30;
+    if (objetivo === "Ganhar Massa") {
+      pctProteina = 0.3;
       pctCarboidrato = 0.45;
       pctGordura = 0.25;
-    } else if (objetivo === 'Perder Peso') {
+    } else if (objetivo === "Perder Peso") {
       pctProteina = 0.35;
-      pctCarboidrato = 0.40;
+      pctCarboidrato = 0.4;
       pctGordura = 0.25;
     } else {
       pctProteina = 0.28;
@@ -85,43 +60,74 @@ export default function Macros() {
       gordura: gordura.toFixed(1),
       pctProteina: (pctProteina * 100).toFixed(0),
       pctCarboidrato: (pctCarboidrato * 100).toFixed(0),
-      pctGordura: (pctGordura * 100).toFixed(0)
-      });
+      pctGordura: (pctGordura * 100).toFixed(0),
+    });
+  }, [resultados, usuario]);
+
+  // Chama o cálculo sempre que os dados mudam
+  useEffect(() => {
+    if (resultados && usuario) {
+      calcularMacros();
+    }
+  }, [resultados, usuario, calcularMacros]);
+
+  const handleCaloriasChange = (e) => {
+    setResultados({ ...resultados, caloriasObjetivo: e.target.value });
   };
 
-  const handleSalvar = () => {
-    localStorage.setItem('resultados', JSON.stringify(resultados));
-    localStorage.setItem('usuarioDados', JSON.stringify(usuario))
-    
-    const planoCustomizado = {
-      calorias: resultados.caloriasObjetivo,
-      macros: macros,
-      tipo: "customizado",
-      objetivo: usuario.objetivo,
-      peso: usuario.peso,
-      altura: usuario.altura,
-      idade: usuario.idade,
-      sexo: usuario.sexo,
-      geradoEm: new Date().toISOString()
-    };
+  const handleObjetivo = (e) => {
+    setUsuario({ ...usuario, objetivo: e.target.value });
+  };
 
-    localStorage.setItem('planoAlimentarAtual', JSON.stringify(planoCustomizado));
-    
-    const historico = JSON.parse(localStorage.getItem('historicoPlanos')) || [];
-    historico.push(planoCustomizado);
-    localStorage.setItem('historicoPlanos', JSON.stringify(historico));
-    
-    alert('Plano alimentar salvo com sucesso!');
-  }
+  // Salvar no Banco de Dados
+  const handleSalvar = async () => {
+    const userId = localStorage.getItem("user_id");
+    if (!userId) return alert("Erro: Usuário não logado.");
+
+    try {
+      // 1. Atualiza objetivo do usuário
+      await fetch(`http://localhost:3000/users/${userId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ objetivo: usuario.objetivo }),
+      });
+
+      // 2. Salva histórico
+      const novoRegistro = {
+        userId: parseInt(userId),
+        date: new Date().toLocaleDateString("pt-BR"),
+        timestamp: new Date().toISOString(),
+        peso: usuario.peso,
+        objetivo: usuario.objetivo,
+        resultadoCalorias: resultados.caloriasObjetivo,
+        resultadoImc: resultados.imc || "N/A",
+        tipo: "customizado",
+      };
+
+      await fetch("http://localhost:3000/history", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(novoRegistro),
+      });
+
+      localStorage.setItem("usuarioDados", JSON.stringify(usuario));
+      localStorage.setItem("resultados", JSON.stringify(resultados));
+
+      alert("Plano atualizado com sucesso!");
+    } catch (error) {
+      console.error("Erro ao salvar:", error);
+      alert("Erro ao salvar. Verifique se o servidor está rodando.");
+    }
+  };
 
   const HandleEdit = () => {
     if (edit) {
       handleSalvar();
     }
     setEdit(!edit);
-  }
+  };
 
-  if (!resultados) return <div>Carregando...</div>;
+  if (!resultados || !usuario) return <div>Carregando...</div>;
 
   return (
     <div className="macros-container">
@@ -131,57 +137,73 @@ export default function Macros() {
           <h3 className="titulo-card">Metas</h3>
           <div className="campo">
             <label>Calorias diárias</label>
-            <Input type="number" name="calorias" disabled={!edit} value={resultados.caloriasObjetivo} onChange={handleCaloriasChange}/>
+            <Input
+              type="number"
+              name="calorias"
+              disabled={!edit}
+              value={resultados.caloriasObjetivo}
+              onChange={handleCaloriasChange}
+            />
           </div>
           <div className="select">
             <label>Objetivo</label>
-            <Select name="objetivo" disabled={!edit} value={usuario.objetivo} onChange={handleObjetivo}>
+            <Select
+              name="objetivo"
+              disabled={!edit}
+              value={usuario.objetivo}
+              onChange={handleObjetivo}
+            >
               <option value="Perder Peso">Perder Peso (Déficit)</option>
               <option value="Manter Peso">Manter Peso (Manutenção)</option>
               <option value="Ganhar Massa">Ganhar Massa (Superávit)</option>
             </Select>
           </div>
-          <Button type="submit" onClick = {HandleEdit}>{edit ? 'Salvar' : 'Editar'}</Button>
+          <Button type="submit" onClick={HandleEdit}>
+            {edit ? "Salvar" : "Customizar"}
+          </Button>
         </div>
-          
+
         <div className="plano-card">
           <h3 className="titulo-card">Plano Alimentar</h3>
           <div className="plano-resultado">
-            <div className="aviso-plano"> 
-            </div>
             <div className="total-recomendado">
               <span>Total Recomendado</span>
-              <p>{resultados.caloriasObjetivo}<span>kcal</span></p>
-            </div>
-
-            <div className="progress-bar">
-              {/* Sua barra de progresso aqui */}
+              <p>
+                {resultados.caloriasObjetivo}
+                <span>kcal</span>
+              </p>
             </div>
 
             <div className="macros-list">
-              
-            <div className="macro-item proteina">
-              <span className="macro-label">Proteína</span>
-              <p className="macro-valor">{macros.proteina}g</p>
-              <span className="macro-percentual">{macros.pctProteina}%</span>
+              <div className="macro-item proteina">
+                <span className="macro-label">Proteína</span>
+                <div className="macro-info">
+                  <p className="macro-valor">{macros.proteina}g</p>
+                  <span className="macro-percentual">{macros.pctProteina}%</span>
+                </div>
+              </div>
+              <div className="macro-item carboidrato">
+                <span className="macro-label">Carboidrato</span>
+                <div className="macro-info">
+                  <p className="macro-valor">{macros.carboidrato}g</p>
+                  <span className="macro-percentual">{macros.pctCarboidrato}%</span>
+                </div>
+              </div>
+              <div className="macro-item gordura">
+                <span className="macro-label">Gordura</span>
+                <div className="macro-info">
+                  <p className="macro-valor">{macros.gordura}g</p>
+                  <span className="macro-percentual">{macros.pctGordura}%</span>
+                </div>
+              </div>
             </div>
-
-            <div className="macro-item carboidrato">
-              <span className="macro-label">Carboidrato</span>
-              <p className="macro-valor">{macros.carboidrato}g</p>
-              <span className="macro-percentual">{macros.pctCarboidrato}%</span>
-            </div>
-
-            <div className="macro-item gordura">
-              <span className="macro-label">Gordura</span>
-              <p className="macro-valor">{macros.gordura}g</p>
-              <span className="macro-percentual">{macros.pctGordura}%</span>
-            </div>
-          </div>
           </div>
         </div>
       </div>
-      <p>Este plano foi gerado com base nos dados do seu perfil. Você pode customizar as calorias e o objetivo acima.</p>
+      <p>
+        Este plano foi gerado com base nos dados do seu perfil. Você pode
+        customizar as calorias e o objetivo acima.
+      </p>
     </div>
   );
 }

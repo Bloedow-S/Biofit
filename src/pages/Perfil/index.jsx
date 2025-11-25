@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react"; 
-import { useNavigate } from 'react-router-dom'; 
-import PropTypes from 'prop-types';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 import Button from "../../components/Button";
 import "./style.css";
 
@@ -8,7 +8,7 @@ import iconBmi from "../../assets/fogo.png";
 import iconWeight from "../../assets/peso.png";
 import iconUser from "../../assets/do-utilizador.png";
 
-// Componente InfoItem (sem alteração)
+// Componente InfoItem (inalterado)
 function InfoItem({ label, value }) {
   return (
     <div className="info-item">
@@ -17,13 +17,11 @@ function InfoItem({ label, value }) {
     </div>
   );
 }
-
 InfoItem.propTypes = {
   label: PropTypes.string.isRequired,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired, 
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-// Função para calcular o IMC (sem alteração)
 function calcularIMC(peso, alturaEmCm) {
   if (!peso || !alturaEmCm) return "N/A";
   const alturaEmMetros = alturaEmCm / 100;
@@ -36,54 +34,58 @@ export default function Perfil() {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    const usuarioSalvo = JSON.parse(localStorage.getItem('usuario'));
+    const userId = localStorage.getItem("user_id");
 
-    // Proteção da Rota:
-    // Se não há usuário OU se o perfil não está completo, chuta ele daqui
-    if (!usuarioSalvo || !usuarioSalvo.perfilCompleto) {
-      alert("Você precisa fazer login e completar seu perfil primeiro.");
-      navigate('/'); // Manda de volta para o login
+    if (!userId) {
+      alert("Faça login novamente.");
+      navigate("/");
       return;
     }
 
-    // Se chegou aqui, o usuário está OK
-    const imcCalculado = calcularIMC(usuarioSalvo.peso, usuarioSalvo.altura);
-    setUserData({
-      ...usuarioSalvo,
-      imc: imcCalculado,
-    });
+    // BUSCA DADOS DO SERVIDOR (Garante que está atualizado)
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/users/${userId}`);
+        if (response.ok) {
+          const data = await response.json();
+          if (!data.perfilCompleto) {
+            navigate("/CriarConta");
+            return;
+          }
 
-  }, [navigate]); 
+          const imcCalculado = calcularIMC(data.peso, data.altura);
+          // Atualiza estado e também o localStorage para outras páginas usarem se precisarem rápido
+          const dadosCompletos = { ...data, imc: imcCalculado };
+          setUserData(dadosCompletos);
+          localStorage.setItem("usuario", JSON.stringify(dadosCompletos));
+        }
+      } catch (error) {
+        console.error("Erro ao buscar perfil:", error);
+      }
+    };
+
+    fetchUser();
+  }, [navigate]);
 
   const handleEdit = () => {
-    // Leva o usuário de volta à página de "onboarding" para editar os dados
-    alert("Você será levado para a tela de edição de perfil.");
-    // Define a flag como false temporariamente para permitir a re-edição
-    const usuario = JSON.parse(localStorage.getItem('usuario'));
-    if(usuario) {
-      usuario.perfilCompleto = false;
-      localStorage.setItem('usuario', JSON.stringify(usuario));
-    }
-    navigate('/criar-conta');
+    // Vai para a tela de CriarConta, mas precisamos garantir que ela saiba que é uma EDIÇÃO
+    // Uma forma simples é setar o perfilCompleto como false no objeto do localStorage temporariamente
+    // ou apenas navegar e deixar a CriarConta (já configurada no passo anterior) carregar os dados.
+    navigate("/CriarConta");
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('usuario');
-    localStorage.removeItem('user_id'); // Adicionado para limpeza completa
-    alert("Você foi desconectado.");
-    navigate('/'); 
+    localStorage.clear(); // Limpa tudo (token, dados, historico local)
+    navigate("/");
   };
 
-  // Enquanto os dados não carregam
-  if (!userData) {
-    return <div>Carregando perfil...</div>;
-  }
+  if (!userData) return <div>Carregando perfil...</div>;
 
-  // Renderização principal
   return (
     <div className="perfil-container">
-      {/* Agora o 'nome' existe e será exibido */}
-      <h1 className="perfil-greeting">Olá, {userData.nome.split(" ")[0]}!</h1>
+      <h1 className="perfil-greeting">
+        Olá, {userData.nome ? userData.nome.split(" ")[0] : "Usuário"}!
+      </h1>
 
       <div className="stat-cards-container">
         <div className="stat-card">
@@ -97,7 +99,7 @@ export default function Perfil() {
           <img src={iconWeight} alt="Peso" />
           <div className="stat-info">
             <span className="stat-label">Peso Atual</span>
-            <span className="stat-value">{userData.peso} kg</span> 
+            <span className="stat-value">{userData.peso} kg</span>
           </div>
         </div>
       </div>
@@ -121,11 +123,10 @@ export default function Perfil() {
         <Button
           type="button"
           onClick={handleEdit}
-          className="perfil-edit-button" 
+          className="perfil-edit-button"
         >
           Editar Dados
         </Button>
-     
       </div>
 
       <button className="logout-button" onClick={handleLogout}>
