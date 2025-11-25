@@ -23,7 +23,50 @@
       "peso": 70,
       "altura": 175,
       "objetivo": "Ganhar Massa"
+    },
+    {
+      "email": "gabriel.molinari2007@gmail.com",
+      "pass": "1234",
+      "perfilCompleto": true,
+      "id": 3,
+      "nome": "Gabriel Molinari da Rocha",
+      "sexo": "Masculino",
+      "idade": 70,
+      "peso": 90,
+      "altura": 180,
+      "objetivo": "Perder Peso"
     }
   ],
-  "history": []
+  "history": [
+    {
+      "userId": 3,
+      "date": "25/11/2025",
+      "timestamp": "2025-11-25T13:07:36.762Z",
+      "peso": 90,
+      "objetivo": "Perder Peso",
+      "resultadoCalorias": "1180",
+      "resultadoImc": "27.8",
+      "id": 1
+    },
+    {
+      "userId": 3,
+      "date": "25/11/2025",
+      "timestamp": "2025-11-25T13:11:03.908Z",
+      "peso": 90,
+      "objetivo": "Perder Peso",
+      "resultadoCalorias": "1180",
+      "resultadoImc": "27.8",
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "date": "25/11/2025",
+      "timestamp": "2025-11-25T13:11:18.561Z",
+      "peso": 90,
+      "objetivo": "Perder Peso",
+      "resultadoCalorias": "1180",
+      "resultadoImc": "27.8",
+      "id": 3
+    }
+  ]
 }
