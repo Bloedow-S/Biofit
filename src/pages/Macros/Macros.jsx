@@ -88,7 +88,7 @@ export default function Macros() {
 
     try {
       // 1. Atualiza objetivo do usuário
-      await fetch(`https://6927085926e7e41498fca64b.mockapi.io/BioFit/:endpoint/users/${userId}`, {
+      await fetch(`https://6927085926e7e41498fca64b.mockapi.io/BioFit/users/${userId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ objetivo: usuario.objetivo }),
@@ -106,7 +106,7 @@ export default function Macros() {
         tipo: "customizado",
       };
 
-      await fetch("https://6927085926e7e41498fca64b.mockapi.io/BioFit/:endpoint/history", {
+      await fetch("https://6927085926e7e41498fca64b.mockapi.io/BioFit/history", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(novoRegistro),

@@ -46,7 +46,7 @@ export default function Perfil() {
     // BUSCA DADOS DO SERVIDOR (Garante que está atualizado)
     const fetchUser = async () => {
       try {
-        const response = await fetch(`https://6927085926e7e41498fca64b.mockapi.io/BioFit/:endpoint/users/${userId}`);
+        const response = await fetch(`https://6927085926e7e41498fca64b.mockapi.io/BioFit/users/${userId}`);
         if (response.ok) {
           const data = await response.json();
           if (!data.perfilCompleto) {

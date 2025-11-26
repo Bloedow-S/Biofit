@@ -28,7 +28,7 @@ export default function Calculos() {
 
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`https://6927085926e7e41498fca64b.mockapi.io/BioFit/:endpoint/users/${userId}`);
+        const response = await fetch(`https://6927085926e7e41498fca64b.mockapi.io/BioFit/users/${userId}`);
         if (response.ok) {
           const data = await response.json();
           if (!data.perfilCompleto) {
@@ -102,7 +102,7 @@ export default function Calculos() {
     };
 
     try {
-      await fetch('https://6927085926e7e41498fca64b.mockapi.io/BioFit/:endpoint/history', {
+      await fetch('https://6927085926e7e41498fca64b.mockapi.io/BioFit/history', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(novoRegistro)

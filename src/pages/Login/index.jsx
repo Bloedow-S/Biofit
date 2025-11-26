@@ -24,7 +24,7 @@ function Login() {
     }
 
     try {
-      const url = `https://6927085926e7e41498fca64b.mockapi.io/BioFit/:endpoint/users?email=${encodeURIComponent(
+      const url = `https://6927085926e7e41498fca64b.mockapi.io/BioFit/users?email=${encodeURIComponent(
         cleanedEmail
       )}&pass=${encodeURIComponent(cleanedSenha)}`;
       const response = await fetch(url);
