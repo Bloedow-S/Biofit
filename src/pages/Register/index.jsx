@@ -28,7 +28,7 @@ function Register() {
 
     try {
       const checkUser = await fetch(
-        `https://6927085926e7e41498fca64b.mockapi.io/BioFit/users?email=${encodeURIComponent(cleanedEmail)}`
+        `http://localhost:3000/users?email=${encodeURIComponent(cleanedEmail)}`
       );
       const existingUsers = await checkUser.json();
 
@@ -44,7 +44,7 @@ function Register() {
         perfilCompleto: false,
       };
 
-      const response = await fetch("https://6927085926e7e41498fca64b.mockapi.io/BioFit/users", {
+      const response = await fetch("http://localhost:3000/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(novoUsuario),

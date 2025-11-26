@@ -63,7 +63,7 @@ export default function CriarConta() {
     };
 
     try {
-      const response = await fetch(`https://6927085926e7e41498fca64b.mockapi.io/BioFit/users/${usuarioAtual.id}`, {
+      const response = await fetch(`http://localhost:3000/users/${usuarioAtual.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(usuarioAtualizado),
