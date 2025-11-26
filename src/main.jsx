@@ -14,6 +14,7 @@ import Perfil from "./pages/Perfil/index";
 import Calculos from "./pages/Calculos/Calculos";
 import Macros from "./pages/Macros/Macros";
 import History from "./pages/History/index.jsx";
+import IA from "./pages/IA/index.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -30,6 +31,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/calculos" element={<Calculos />} />
           <Route path="/macros" element={<Macros />} />
           <Route path="/history" element={<History />} />
+          <Route path="/ia" element={<IA />} /> 
         </Route>
         <Route path="*" element={<div>Erro 404: Página não encontrada!</div>} />{" "}
         {/*rota para pagina não encontrada */}

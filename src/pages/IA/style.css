@@ -1,0 +1,99 @@
+.ia-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+}
+
+.ia-container h1 {
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.ia-content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* Área de Input */
+.ia-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.ia-textarea {
+  width: 100%;
+  height: 100px;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: none;
+  background-color: var(--background-input);
+}
+
+.ia-textarea:focus {
+  outline: none;
+  border-color: var(--background-button);
+  box-shadow: 0 0 0 2px rgba(99, 185, 149, 0.2);
+}
+
+/* Sugestões (Chips) */
+.sugestoes p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+.chip-button {
+  background-color: #e0f2f1;
+  border: 1px solid #b2dfdb;
+  color: #00695c;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  transition: all 0.2s;
+}
+
+.chip-button:hover {
+  background-color: #b2dfdb;
+}
+
+/* Área de Resposta */
+.ia-response-area {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.ia-bubble {
+  background-color: #fff;
+  border-left: 5px solid var(--background-button);
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.ia-bubble h3 {
+  color: var(--background-button);
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.ia-bubble p {
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
