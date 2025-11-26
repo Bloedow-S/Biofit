@@ -12,7 +12,7 @@ export const consultarNutricionistaIA = async (perfilUsuario, pergunta) => {
     // Montamos um contexto para a IA saber quem é o usuário
     const contexto = `
       Você é um nutricionista esportivo especializado.
-      Responda de forma curta, motivadora e direta (máximo 2 parágrafos).
+      Responda de forma curta, motivadora e direta (máximo 1 parágrafo).
       
       Dados do usuário:
       - Nome: ${perfilUsuario.nome}
