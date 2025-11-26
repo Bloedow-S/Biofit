@@ -1,96 +1,128 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { consultarNutricionistaIA } from "../../ai";
-import Button from "../../components/Button";
-import Card from "../../components/Card";
 import "./style.css";
 
 export default function IA() {
-  const [pergunta, setPergunta] = useState("");
-  const [resposta, setResposta] = useState("");
-  const [loading, setLoading] = useState(false);
   const [usuario, setUsuario] = useState(null);
+  const [pergunta, setPergunta] = useState("");
+  const [mensagens, setMensagens] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const chatEndRef = useRef(null);
 
+  // Carregar usuário
   useEffect(() => {
     const dados = localStorage.getItem("usuario");
-    if (dados) {
-      setUsuario(JSON.parse(dados));
-    }
+    if (dados) setUsuario(JSON.parse(dados));
   }, []);
 
+  // Scroll automático
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [mensagens, loading]);
+
+  // Formatar texto com **negrito**
+  const formatar = (txt) =>
+    txt.split("\n").map((linha, i) => (
+      <p
+        key={i}
+        dangerouslySetInnerHTML={{
+          __html: linha.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>"),
+        }}
+      />
+    ));
+
+  // Enviar pergunta
   const handleEnviar = async (e) => {
     e.preventDefault();
-    if (!pergunta.trim()) return toast.warning("Digite uma dúvida!");
-    if (!usuario) return toast.error("Perfil não encontrado. Faça login novamente.");
+    if (!pergunta.trim()) return;
+    if (!usuario) return toast.error("Faça login novamente.");
 
+    const perguntaAtual = pergunta;
+    setPergunta("");
+
+    setMensagens((prev) => [...prev, { tipo: "user", texto: perguntaAtual }]);
     setLoading(true);
-    setResposta(""); // Limpa resposta anterior
 
     try {
-      const resultado = await consultarNutricionistaIA(usuario, pergunta);
-      setResposta(resultado);
-      toast.success("Resposta gerada!");
+      const resposta = await consultarNutricionistaIA(usuario, perguntaAtual);
+
+      setMensagens((prev) => [...prev, { tipo: "ai", texto: resposta }]);
     } catch {
-      toast.error("Erro ao consultar a IA.");
+      toast.error("Erro ao consultar IA.");
     } finally {
       setLoading(false);
     }
   };
 
   const sugestoes = [
-    "Me dê uma opção de café da manhã pré-treino",
-    "Como bater minha meta de proteínas gastando pouco?",
-    "Quais suplementos você recomenda para o meu objetivo?",
+    "Opção de café da manhã pré-treino ☕",
+    "Como bater a meta de proteínas barato? 💸",
+    "Suplementos para meu objetivo 💊",
   ];
 
   return (
     <div className="ia-container">
-      <h1>Nutricionista Virtual 🤖</h1>
-      <p>Tire suas dúvidas ou peça sugestões personalizadas para o seu perfil.</p>
+      <header className="ia-header">
+        <h1>Nutricionista Virtual 🤖</h1>
+        <p>
+          Seu assistente pessoal para dúvidas rápidas — não substitui um
+          nutricionista real. 🍏
+        </p>
+      </header>
 
-      <div className="ia-content">
-        <div className="ia-input-area">
-          <Card>
-            <form onSubmit={handleEnviar} className="ia-form">
-              <textarea
-                className="ia-textarea"
-                placeholder="Ex: O que posso comer de lanche da tarde?"
-                value={pergunta}
-                onChange={(e) => setPergunta(e.target.value)}
-                disabled={loading}
-              />
-              <Button type="submit" disabled={loading}>
-                {loading ? "Consultando..." : "Enviar Pergunta"}
-              </Button>
-            </form>
-            
-            <div className="sugestoes">
-              <p>Sugestões:</p>
-              {sugestoes.map((sugestao, index) => (
-                <button 
-                  key={index} 
-                  className="chip-button" 
-                  onClick={() => setPergunta(sugestao)}
+      <div className="chat-window">
+        {mensagens.length === 0 && (
+          <div className="empty-state">
+            <p>Olá, {usuario?.nome?.split(" ")[0]}! Como posso ajudar hoje?</p>
+
+            <div className="sugestoes-container">
+              {sugestoes.map((txt, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPergunta(txt)}
+                  className="chip-suggestion"
                 >
-                  {sugestao}
+                  {txt}
                 </button>
-              ))}
-            </div>
-          </Card>
-        </div>
-
-        {resposta && (
-          <div className="ia-response-area">
-            <div className="ia-bubble">
-              <h3>Resposta do BioFit AI:</h3>
-              {/* Formata quebras de linha */}
-              {resposta.split("\n").map((line, i) => (
-                <p key={i}>{line}</p>
               ))}
             </div>
           </div>
         )}
+
+        {mensagens.map((m, i) => (
+          <div key={i} className={`message-bubble ${m.tipo}`}>
+            <div className="bubble-content">
+              {m.tipo === "ai" ? formatar(m.texto) : <p>{m.texto}</p>}
+            </div>
+          </div>
+        ))}
+
+        {loading && (
+          <div className="message-bubble ai">
+            <div className="typing-indicator">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        )}
+
+        <div ref={chatEndRef} />
       </div>
+
+      <form onSubmit={handleEnviar} className="input-area">
+        <input
+          type="text"
+          placeholder="Digite sua dúvida..."
+          value={pergunta}
+          onChange={(e) => setPergunta(e.target.value)}
+          disabled={loading}
+        />
+        <button type="submit" disabled={loading || !pergunta.trim()}>
+          Enviar
+        </button>
+      </form>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+// src/ai.js
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Lembre-se de criar o arquivo .env com VITE_GEMINI_API_KEY=sua_chave
@@ -5,7 +6,8 @@ const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
 export const consultarNutricionistaIA = async (perfilUsuario, pergunta) => {
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // ATUALIZAÇÃO: O modelo 1.5 foi descontinuado. Usando o 2.5 Flash.
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" }); 
 
     // Montamos um contexto para a IA saber quem é o usuário
     const contexto = `

@@ -1,6 +1,6 @@
 import "./style.css";
 import { NavLink } from "react-router-dom";
-import iconIA from "../../assets/fatia-de-bolo.png";
+import iconIA from "../../assets/artificial-intelligence.png"; // Ícone provisório
 import iconPerfil from "../../assets/do-utilizador.png";
 import iconCalculos from "../../assets/calculadora.png";
 import iconMacros from "../../assets/fatia-de-bolo.png";
