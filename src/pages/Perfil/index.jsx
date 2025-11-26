@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
+import { toast } from 'react-toastify';
 import Button from "../../components/Button";
 import "./style.css";
 
@@ -37,7 +38,7 @@ export default function Perfil() {
     const userId = localStorage.getItem("user_id");
 
     if (!userId) {
-      alert("Faça login novamente.");
+      toast.info("Faça login novamente.");
       navigate("/");
       return;
     }
@@ -49,6 +50,7 @@ export default function Perfil() {
         if (response.ok) {
           const data = await response.json();
           if (!data.perfilCompleto) {
+            toast.warning("Complete seu perfil para ver esta página.");
             navigate("/CriarConta");
             return;
           }
@@ -61,6 +63,7 @@ export default function Perfil() {
         }
       } catch (error) {
         console.error("Erro ao buscar perfil:", error);
+        toast.error("Erro ao carregar perfil.");
       }
     };
 
@@ -68,14 +71,12 @@ export default function Perfil() {
   }, [navigate]);
 
   const handleEdit = () => {
-    // Vai para a tela de CriarConta, mas precisamos garantir que ela saiba que é uma EDIÇÃO
-    // Uma forma simples é setar o perfilCompleto como false no objeto do localStorage temporariamente
-    // ou apenas navegar e deixar a CriarConta (já configurada no passo anterior) carregar os dados.
     navigate("/CriarConta");
   };
 
   const handleLogout = () => {
     localStorage.clear(); // Limpa tudo (token, dados, historico local)
+    toast.info("Você saiu da conta.");
     navigate("/");
   };
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../components/Button'; // Importamos o Botão
+import { toast } from 'react-toastify';
+import Button from '../../components/Button';
 import './style.css'; 
 
 export default function Calculos() {
@@ -20,7 +21,7 @@ export default function Calculos() {
     const userId = localStorage.getItem('user_id');
 
     if (!userId) {
-      alert("Usuário não identificado. Faça login novamente.");
+      toast.info("Usuário não identificado. Faça login novamente.");
       navigate('/');
       return;
     }
@@ -31,16 +32,18 @@ export default function Calculos() {
         if (response.ok) {
           const data = await response.json();
           if (!data.perfilCompleto) {
-             alert("Complete seu perfil antes de acessar os cálculos.");
+             toast.warning("Complete seu perfil antes de acessar os cálculos.");
              navigate('/CriarConta');
              return;
           }
           setUserData(data);
         } else {
           console.error("Erro ao buscar usuário");
+          toast.error("Erro ao carregar dados do usuário.");
         }
       } catch (error) {
         console.error("Erro de conexão:", error);
+        toast.error("Erro de conexão com o servidor.");
       }
     };
 
@@ -104,10 +107,10 @@ export default function Calculos() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(novoRegistro)
       });
-      alert("Cálculo salvo no histórico com sucesso!");
+      toast.success("Cálculo salvo no histórico com sucesso!");
     } catch (error) {
       console.error("Erro ao salvar histórico:", error);
-      alert("Erro ao conectar com o servidor.");
+      toast.error("Erro ao conectar com o servidor.");
     } finally {
       setSaving(false);
     }

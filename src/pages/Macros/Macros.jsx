@@ -1,4 +1,5 @@
-import { useState, useEffect, useCallback } from "react"; // Import movido para o topo
+import { useState, useEffect, useCallback } from "react";
+import { toast } from 'react-toastify';
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import Select from "../../components/Select";
@@ -20,14 +21,15 @@ export default function Macros() {
 
   // Carregar dados ao iniciar
   useEffect(() => {
-    const dados = JSON.parse(localStorage.getItem("usuarioDados"));
+    // Tenta carregar do localStorage ou define valores padrão para evitar erros se estiver vazio
+    const dados = JSON.parse(localStorage.getItem("usuario")); // Alterado de "usuarioDados" para "usuario" para consistência com outras telas
     const calculos = JSON.parse(localStorage.getItem("resultados"));
 
     if (dados) setUsuario(dados);
     if (calculos) setResultados(calculos);
   }, []);
 
-  // Função de cálculo (useCallback evita recriação desnecessária)
+  // Função de cálculo
   const calcularMacros = useCallback(() => {
     if (!resultados || !usuario) return;
 
@@ -82,7 +84,7 @@ export default function Macros() {
   // Salvar no Banco de Dados
   const handleSalvar = async () => {
     const userId = localStorage.getItem("user_id");
-    if (!userId) return alert("Erro: Usuário não logado.");
+    if (!userId) return toast.error("Erro: Usuário não logado.");
 
     try {
       // 1. Atualiza objetivo do usuário
@@ -110,13 +112,13 @@ export default function Macros() {
         body: JSON.stringify(novoRegistro),
       });
 
-      localStorage.setItem("usuarioDados", JSON.stringify(usuario));
+      localStorage.setItem("usuario", JSON.stringify(usuario));
       localStorage.setItem("resultados", JSON.stringify(resultados));
 
-      alert("Plano atualizado com sucesso!");
+      toast.success("Plano atualizado com sucesso!");
     } catch (error) {
       console.error("Erro ao salvar:", error);
-      alert("Erro ao salvar. Verifique se o servidor está rodando.");
+      toast.error("Erro ao salvar. Verifique se o servidor está rodando.");
     }
   };
 
@@ -127,7 +129,7 @@ export default function Macros() {
     setEdit(!edit);
   };
 
-  if (!resultados || !usuario) return <div>Carregando...</div>;
+  if (!resultados || !usuario) return <div>Carregando dados... (Visite a aba Cálculos primeiro)</div>;
 
   return (
     <div className="macros-container">
