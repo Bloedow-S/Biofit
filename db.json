@@ -55,6 +55,26 @@
       "pass": "1234",
       "perfilCompleto": false,
       "id": 5
+    },
+    {
+      "nome": "Maykon",
+      "email": "maykon1@gmail.com",
+      "pass": "1234",
+      "perfilCompleto": true,
+      "id": 6,
+      "sexo": "Masculino",
+      "idade": 37,
+      "peso": 90,
+      "altura": 183,
+      "objetivo": "Perder Peso",
+      "imc": "26.9"
+    },
+    {
+      "nome": "bernardo",
+      "email": "bernardo@fjasdgfj.com",
+      "pass": "1234",
+      "perfilCompleto": false,
+      "id": 7
     }
   ],
   "history": [
@@ -193,6 +213,27 @@
       "resultadoImc": "27.8",
       "tipo": "customizado",
       "id": 13
+    },
+    {
+      "userId": 6,
+      "date": "26/11/2025",
+      "timestamp": "2025-11-26T13:47:45.634Z",
+      "peso": 90,
+      "objetivo": "Perder Peso",
+      "resultadoCalorias": "1364",
+      "resultadoImc": "26.9",
+      "tipo": "customizado",
+      "id": 14
+    },
+    {
+      "userId": 6,
+      "date": "26/11/2025",
+      "timestamp": "2025-11-26T13:48:11.651Z",
+      "peso": 90,
+      "objetivo": "Perder Peso",
+      "resultadoCalorias": "1364",
+      "resultadoImc": "26.9",
+      "id": 15
     }
   ]
 }

@@ -12,7 +12,7 @@ export default function History() {
       try {
         // Busca no json-server filtrando pelo userId e ordenando por data (mais recente primeiro)
         // Nota: _sort e _order são recursos do json-server
-        const response = await fetch(`http://localhost:3000/history?userId=${userId}&_sort=timestamp&_order=desc`);
+        const response = await fetch(`https://6927085926e7e41498fca64b.mockapi.io/BioFit/:endpoint/history?userId=${userId}&_sort=timestamp&_order=desc`);
         const data = await response.json();
         setHistorico(data);
       } catch (error) {
